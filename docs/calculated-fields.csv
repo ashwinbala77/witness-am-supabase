@@ -1,0 +1,1238 @@
+table,field,airtable_type,result_type,logic,proposed_recreation
+Investments,Est_PIP_cost,multipleLookupValues,currency,Asset_detail.[Est_PIP_cost] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,Operating_balance,rollup,currency,Cash_accounts.[Latest_cash_balance] via link [Cash_accounts_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Quarter_end_operating_balance,rollup,currency,Cash_accounts.[Quarter_end_cash_balance] via link [Cash_accounts_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Reserve_balance,rollup,currency,Cash_accounts.[Latest_cash_balance] via link [Cash_accounts_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Quarter_end_reserve_balance,rollup,currency,Cash_accounts.[Quarter_end_cash_balance] via link [Cash_accounts_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,PIP_balance,rollup,currency,Cash_accounts.[Latest_cash_balance] via link [Cash_accounts_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Quarter_end_PIP_balance,rollup,currency,Cash_accounts.[Quarter_end_cash_balance] via link [Cash_accounts_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,TTM_total_operating_revenue,rollup,currency,Asset_detail.[TTM_total_operating_revenue] via link [Asset_detail_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,TTM_NOI,rollup,currency,Asset_detail.[TTM_NOI] via link [Asset_detail_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Adj_TTM_NOI,rollup,currency,Asset_detail.[TTM_adjusted_NOI] via link [Asset_detail_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Latest_cap_rate_date,rollup,date,Investments_market_value.[Cap_rate_date] via link [Investments_market_value_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Latest_cap_rate,multipleLookupValues,percent,Investments_market_value.[Latest_cap_rate] via link [Investments_market_value_link],JOIN to the linked table in a view (returns array)
+Investments,TTM_valuation,formula,currency,{Adj_TTM_NOI}/{Latest_cap_rate},Postgres generated column or view expression
+Investments,Latest_valuation_date,rollup,date,Investments_market_value.[Date] via link [Investments_market_value_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Latest_valuation_method,multipleLookupValues,singleSelect,Investments_market_value.[Valuation_method] via link [Investments_market_value_link],JOIN to the linked table in a view (returns array)
+Investments,Latest_valuation,rollup,currency,Investments_market_value.[Latest_valuation] via link [Investments_market_value_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Appfolio_value,rollup,currency,Investments_market_value.[Appfolio_value] via link [Investments_market_value_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,Latest_debt_balance_date,rollup,date,Loan_summary_data.[Latest_balance_date] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Latest_debt_balance,rollup,currency,Loan_summary_data.[Latest_debt_balance] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Latest_net_equity,formula,currency,{Latest_valuation}-{Latest_debt_balance},Postgres generated column or view expression
+Investments,Sale_cash_disbursement,formula,currency,{Sale_price}-{Selling_expense},Postgres generated column or view expression
+Investments,Taxable_capital_gain,formula,currency,{Sale_cash_disbursement}-{2024_tax_net_book_val.},Postgres generated column or view expression
+Investments,Total_capital_gain,formula,currency,{ST_capital_gain}+{LT_capital_gain},Postgres generated column or view expression
+Investments,Monthly_debt_payment,rollup,currency,Loan_summary_data.[Monthly_debt_payment] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,TTM_debt_payment,rollup,currency,Asset_detail.[TTM_debt_payment] via link [Asset_detail_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,TTM_cash_flow,rollup,currency,Hotel_actuals.[Cash_flow] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,2022_tax_net_book_value,formula,currency,{Tax_cost}-{2022_tax_end_depreciation},Postgres generated column or view expression
+Investments,TTM_valuation_variance,formula,currency,{Latest_valuation}-{TTM_valuation},Postgres generated column or view expression
+Investments,LTV,formula,percent,{Latest_debt_balance}/{Latest_valuation},Postgres generated column or view expression
+Investments,Room_count,multipleLookupValues,number,Asset_detail.[Room_count] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,Value_per_key,formula,currency,{Latest_valuation}/{Room_count},Postgres generated column or view expression
+Investments,Debt_per_key,formula,currency,{Latest_debt_balance}/{Room_count},Postgres generated column or view expression
+Investments,Equity_recap,formula,currency,{Latest_valuation}-{Latest_debt_balance}-({Latest_valuation}*.05),Postgres generated column or view expression
+Investments,City,multipleLookupValues,singleSelect,Asset_detail.[City] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,State,multipleLookupValues,singleSelect,Asset_detail.[State] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,MOIC,formula,number,{Total_distributed}/{Total_contributed},Postgres generated column or view expression
+Investments,TTM_LTV,formula,percent,{Latest_debt_balance}/{TTM_valuation},Postgres generated column or view expression
+Investments,Renovation_internal_target_end_date,multipleLookupValues,date,Asset_detail.[Renovation_internal_target_end_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,Implied_cap_rate_TTM,formula,percent,{TTM_NOI}/{Latest_valuation},Postgres generated column or view expression
+Investments,Hotel_brand,multipleLookupValues,multipleRecordLinks,Asset_detail.[Hotel_brand_metrics_link] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,Open_year,multipleLookupValues,number,Asset_detail.[Open_year] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,YE23_est_interest_expense,rollup,currency,Loan_summary_data.[YE23_est_interest_expense] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,YE24_est_interest_expense,rollup,currency,Loan_summary_data.[YE24_est_interest_expense] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,YE25_est_interest_expense,rollup,currency,Loan_summary_data.[YE25_est_interest_expense] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,YE26_est_interest_expense,rollup,currency,Loan_summary_data.[YE26_est_interest_expense] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,YE27_est_interest_expense,rollup,currency,Loan_summary_data.[YE27_est_interest_expense] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,YE28_est_interest_expense,rollup,currency,Loan_summary_data.[YE28_est_interest_expense] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Last_updated,lastModifiedTime,dateTime,,updated_at timestamptz via trigger
+Investments,Latest_cash_balance_date,rollup,date,Cash_accounts.[Latest_balance_date] via link [Cash_accounts_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Debt_recourse,multipleLookupValues,singleSelect,Loan_summary_data.[Debt_recourse] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Investments,Latest_financials_date,rollup,date,Hotel_actuals.[Date] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Latest_forecast_date,rollup,date,Hotel_forecast.[Forecast_period] via link [Hotel_forecast_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Hotel_anonymous_reference,multipleLookupValues,singleLineText,Asset_detail.[Hotel_anonymous_reference] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,Asset_age,multipleLookupValues,number,Asset_detail.[Asset_age] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,PIP_funding_strategy,multipleLookupValues,singleSelect,Asset_detail.[PIP_funding_strategy] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,Est_PIP_cost_per_key,formula,currency,{Est_PIP_cost}/{Room_count},Postgres generated column or view expression
+Investments,Open_committment,formula,currency,{Total_committed}- {Total_contributed},Postgres generated column or view expression
+Investments,Years_until_PIP,formula,number,"IF({Renovation_internal_target_end_date}=BLANK(),BLANK(),DATETIME_DIFF({Renovation_internal_target_end_date},TODAY(),'days')/365)",Postgres generated column or view expression
+Investments,Remaining_franchise_term_years,multipleLookupValues,number,Asset_detail.[Remaining_franchise_term_years] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,2024_NOI,rollup,currency,Hotel_actuals.[EBITDA_NOI] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,2024_taxable_income,formula,currency,{2024_NOI}-{2024_total_depreciation}-{YE24_est_interest_expense},Postgres generated column or view expression
+Investments,2024_cash_flow,rollup,currency,Hotel_actuals.[Cash_flow] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Forecasted_cash_flow_for_PIP,formula,currency,"IF(
+  {Years_until_PIP}=BLANK()
+,BLANK()
+,IF({Years_until_PIP}<0,BLANK(),{2025_Act+Bud_cash_flow}*{Years_until_PIP}))",Postgres generated column or view expression
+Investments,Post_PIP_cash_reserve,formula,currency,"IF(OR({Est_PIP_cost}=0,{Est_PIP_cost}=BLANK())
+,
+BLANK()
+,
+{Forecasted_cash_flow_for_PIP}
++{Reserve_balance}
+-{Est_PIP_cost})",Postgres generated column or view expression
+Investments,TTM_DSCR,formula,number,"IF({TTM_debt_payment}=BLANK(),BLANK(),{Adj_TTM_NOI}/{TTM_debt_payment})",Postgres generated column or view expression
+Investments,Loan_maturity,multipleLookupValues,date,Loan_summary_data.[Loan_maturity] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Investments,PIP_funding_status,formula,singleSelect,"IF(OR({Years_until_PIP}<=0,"""",{Post_PIP_cash_reserve}>0),""Property Funded"",""Needs Capital"")",Postgres generated column or view expression
+Investments,Latest_month_NOI,rollup,currency,Hotel_actuals.[EBITDA_NOI] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Latest_month_cash_flow,rollup,currency,Hotel_actuals.[Cash_flow] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,TTM_GOP,rollup,currency,Asset_detail.[TTM_GOP] via link [Asset_detail_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Latest_month_DSCR,formula,number,"IF(OR({Monthly_debt_payment}=BLANK(),{Latest_month_adjusted_NOI}=BLANK()),BLANK(),ROUND({Latest_month_adjusted_NOI},2)/{Monthly_debt_payment})",Postgres generated column or view expression
+Investments,2024_total_depreciation,formula,currency,"{2024_depreciation}+
+({2024_acquisition_bonus_depreciation}+
+{2024_PIP_depreciation}+
+{2024_new_build_depreciation})*.6",Postgres generated column or view expression
+Investments,YE24_actual_interest_expense,rollup,currency,Hotel_actuals.[Interest_expense] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,TTM_debt_yield,formula,percent,"IF(OR({Latest_debt_balance}=BLANK(),{TTM_NOI}=BLANK()),BLANK(),{TTM_NOI}/{Latest_debt_balance})",Postgres generated column or view expression
+Investments,Interest_rate_reset_date,multipleLookupValues,date,Loan_summary_data.[Interest_rate_reset_date] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Investments,Interest_rate,multipleLookupValues,number,Loan_summary_data.[Interest_rate] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Investments,Total_loan_principal,rollup,currency,Loan_summary_data.[Initial_principal] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Quarterly_loan_paydown_rollup,rollup,currency,Loan_summary_data.[Latest_quarter_debt_paydown] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Quarterly_loan_paydown,formula,currency,"IF({Quarterly_loan_paydown_rollup}=0,BLANK(),
+IF({Quarter_loan_paydown_manual_adj}>BLANK(),
+{Quarter_loan_paydown_manual_adj},{Quarterly_loan_paydown_rollup}
+))",Postgres generated column or view expression
+Investments,2025_NOI_actuals,rollup,currency,Hotel_actuals.[EBITDA_NOI] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,2025_NOI_budget,rollup,currency,Hotel_budget.[EBITDA_NOI] via link [Hotel_budget_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,2025_NOI_Act+Bud,formula,currency,"{2025_NOI_actuals}+{2025_NOI_budget}*.8
+",Postgres generated column or view expression
+Investments,2025_Act+Bud_cash_flow,formula,currency,{2025_NOI_Act+Bud}-{TTM_debt_payment},Postgres generated column or view expression
+Investments,2025_Act+Bud_taxable_income,formula,currency,"IF(OR({Investment_status}=""Active"",{Investment_status}=""Active - Construction""),{2025_NOI_Act+Bud}+{CY_cash_interest_income_estimate}-{2025_total_depreciation}-{YE25_est_interest_expense},BLANK())",Postgres generated column or view expression
+Investments,2025_total_depreciation,formula,currency,"{2025_depreciation}+
+({2025_acquisition_bonus_depreciation}+
+{2025_PIP_depreciation}+
+{2025_new_build_depreciation})",Postgres generated column or view expression
+Investments,2025_distributions,rollup,currency,Distributions.[Amount] via link [Distributions],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,NOI_needed_to_exit,formula,currency,{Target_exit_value}*{Target_exit cap_rate},Postgres generated column or view expression
+Investments,NOI_gap_vs._target,formula,currency,{NOI_needed_to_exit}-{TTM_NOI},Postgres generated column or view expression
+Investments,NOI_gap_vs._target_%,formula,percent,"IF({NOI_needed_to_exit}=BLANK(),BLANK(),({NOI_needed_to_exit}-{TTM_NOI})/{TTM_NOI})",Postgres generated column or view expression
+Investments,25_yr_refi_variance,multipleLookupValues,currency,Debt_resizing.[25_yr_refi_variance] via link [Debt_resizing_link],JOIN to the linked table in a view (returns array)
+Investments,Monthly_debt_payment_date,multipleLookupValues,number,Loan_summary_data.[Monthly_debt_payment_date] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Investments,2025_NOI_forecast,rollup,currency,Hotel_forecast.[EBITDA_NOI] via link [Hotel_forecast_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,2025_NOI_budget_ex_fcst,rollup,currency,Hotel_budget.[EBITDA_NOI] via link [Hotel_budget_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,2025_NOI_Act+Fcst+Bud,formula,currency,"{2025_NOI_actuals}+{2025_NOI_forecast}+{2025_NOI_budget_ex_fcst}
+",Postgres generated column or view expression
+Investments,Hotel_franchise,multipleLookupValues,multipleRecordLinks,Asset_detail.[Hotel_brand_metrics_link] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,CY_cash_interest_income_estimate,rollup,currency,Cash_accounts.[CY_interest_income_estimate] via link [Cash_accounts_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,2025_cash_flow_Act+Fcst+Bud,formula,currency,"{2025_NOI_actuals}+{2025_NOI_forecast}+{2025_NOI_budget_ex_fcst}-{TTM_debt_payment}
+",Postgres generated column or view expression
+Investments,YTD_cash_flow,rollup,currency,Hotel_actuals.[Cash_flow] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,YE29_est_interest_expense,rollup,currency,Loan_summary_data.[YE29_est_interest_expense] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,YE30_est_interest_expense,rollup,currency,Loan_summary_data.[YE30_est_interest_expense] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,YE31_est_interest_expense,rollup,currency,Loan_summary_data.[YE31_est_interest_expense] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,YE32_est_interest_expense,rollup,currency,Loan_summary_data.[YE32_est_interest_expense] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,YE33_est_interest_expense,rollup,currency,Loan_summary_data.[YE33_est_interest_expense] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,YE34_est_interest_expense,rollup,currency,Loan_summary_data.[YE34_est_interest_expense] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,YE35_est_interest_expense,rollup,currency,Loan_summary_data.[YE35_est_interest_expense] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Latest_month_adjusted_NOI,rollup,currency,Hotel_actuals.[Adjusted_NOI] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,TTM_DSCR_non_adjusted,formula,number,"IF({TTM_debt_payment}=BLANK(),BLANK(),{TTM_NOI}/{TTM_debt_payment})",Postgres generated column or view expression
+Investments,Guarantee_structure,multipleLookupValues,singleSelect,Loan_summary_data.[Guarantee_structure] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Investments,2026_NOI_actuals,rollup,currency,Hotel_actuals.[EBITDA_NOI] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,SP_ownership,rollup,percent,Investment_positions.[L1_ownership_percentage] via link [Investment_positions_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Reporting_category_breakdown,multipleLookupValues,singleSelect,Investment_positions.[Reporting_category_breakdown] via link [Investment_positions_link],JOIN to the linked table in a view (returns array)
+Investments,Lenders,multipleLookupValues,multipleRecordLinks,Loan_summary_data.[Lenders_link] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Investments,2026_NOI_budget,rollup,currency,Hotel_budget.[EBITDA_NOI] via link [Hotel_budget_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,2026_Act+Bud_cash_flow,formula,currency,{2026_NOI_Act+Bud}-{TTM_debt_payment},Postgres generated column or view expression
+Investments,2026_NOI_Act+Bud,formula,currency,"{2026_NOI_actuals}+{2026_NOI_budget}
+",Postgres generated column or view expression
+Investments,2026_NOI_forecast,rollup,currency,Hotel_forecast.[EBITDA_NOI] via link [Hotel_forecast_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,2026_NOI_Act+Fcst+Bud,formula,currency,"{2026_NOI_actuals}+{2026_NOI_forecast}+{2026_NOI_budget_ex_fcst}
+",Postgres generated column or view expression
+Investments,2026_NOI_budget_ex_fcst,rollup,currency,Hotel_budget.[EBITDA_NOI] via link [Hotel_budget_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,2026_total_depreciation,formula,currency,"{2026_depreciation}+
+({2026_acquisition_bonus_depreciation}+
+{2026_PIP_depreciation}+
+{2026_new_build_depreciation})",Postgres generated column or view expression
+Investments,2026_Act+Bud_taxable_income,formula,currency,"IF(OR({Investment_status}=""Active"",{Investment_status}=""Active - Construction""),{2026_NOI_Act+Bud}+{CY_cash_interest_income_estimate}-{2026_total_depreciation}-{YE26_est_interest_expense},BLANK())",Postgres generated column or view expression
+Investments,2026_DSCR_non_adjusted_Act+Fcst+Bud,formula,number,{2026_NOI_Act+Fcst+Bud}/{Monthly_debt_payment}*12,Postgres generated column or view expression
+Investments,Amortization,multipleLookupValues,singleLineText,Loan_summary_data.[Amortization_months] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Investments,Purchase_price,multipleLookupValues,currency,Asset_detail.[Purchase_price] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Investments,AP_FamCo_ownership_flowthrough,rollup,percent,Investment_positions.[AP_FamCo_ownership_flowthrough] via link [Investment_positions_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,SP_FamCo_ownership_flowthrough,rollup,percent,Investment_positions.[SP_FamCo_ownership_flowthrough] via link [Investment_positions_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,AP_FamCo_ownership_L1,rollup,percent,Investment_positions.[L1_ownership_percentage] via link [Investment_positions_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,SP_FamCo_ownership_L1,rollup,percent,Investment_positions.[L1_ownership_percentage] via link [Investment_positions_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,AP_FamCo_ownership,formula,percent,{AP_FamCo_ownership_flowthrough}+{AP_FamCo_ownership_L1},Postgres generated column or view expression
+Investments,SP_FamCo_ownership,formula,percent,{SP_FamCo_ownership_flowthrough}+{SP_FamCo_ownership_L1},Postgres generated column or view expression
+Investments,EPL_ownership,rollup,percent,Investment_positions.[L1_ownership_percentage] via link [Investment_positions_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Founders_Fund_ownership,formula,percent,{Founders_fund_ownership_L1}+{Founders_fund_ownership_flowthrough},Postgres generated column or view expression
+Investments,Witness_external_ownership_L1,rollup,percent,Investment_positions.[L1_ownership_percentage] via link [Investment_positions_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Witness_external_ownership_flowthrough,rollup,percent,Investment_positions.[Witness_external_ownership_flowthrough] via link [Investment_positions_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Witness_external_ownership,formula,percent,{Witness_external_ownership_L1}+{Witness_external_ownership_flowthrough},Postgres generated column or view expression
+Investments,Founders_fund_ownership_L1,rollup,percent,Investment_positions.[L1_ownership_percentage] via link [Investment_positions_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,Founders_fund_ownership_flowthrough,rollup,percent,Investment_positions.[Founders_fund_ownership_flowthrough] via link [Investment_positions_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,AP_loan_guarantee,multipleLookupValues,singleSelect,Loan_summary_data.[AP_guarantee] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Investments,SP_loan_guarantee,multipleLookupValues,singleSelect,Loan_summary_data.[SP_guarantee] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Investments,Pre-Payment,multipleLookupValues,date,Loan_summary_data.[Pre_payment_end_date] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Investments,Loan_origination_date,multipleLookupValues,date,Loan_summary_data.[Loan_origination_date] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Investments,Record_id,formula,singleLineText,RECORD_ID(),Postgres generated column or view expression
+Investments,Annual_debt_payment_rollup,rollup,currency,Loan_summary_data.[Annual_debt_payment] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,2026_cash_flow_act+fcst+bud,formula,currency,{2026_NOI_Act+Fcst+Bud} - {Annual_debt_payment_rollup},Postgres generated column or view expression
+Investments,2026_fcst_CoC_Return,formula,percent,{2026_cash_flow_act+fcst+bud}/{Equity_contributed},Postgres generated column or view expression
+Investments,2026_distributions,rollup,currency,Distributions.[Amount] via link [Distributions],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments,annual_debt_payment,formula,number,{Monthly_debt_payment} * 12,Postgres generated column or view expression
+Investments,RE_tax_1st_half_date,formula,date,"IF(
+  {RE_tax_1st_half_due_date} = BLANK(), BLANK(),
+  IF(
+    DATETIME_PARSE({RE_tax_1st_half_due_date} & ""/"" & YEAR(TODAY()), ""M/D/YYYY"") < TODAY(),
+    DATETIME_PARSE({RE_tax_1st_half_due_date} & ""/"" & (YEAR(TODAY())+1), ""M/D/YYYY""),
+    DATETIME_PARSE({RE_tax_1st_half_due_date} & ""/"" & YEAR(TODAY()), ""M/D/YYYY"")
+  )
+)",Postgres generated column or view expression
+Investments,RE_tax_2nd_half_date,formula,date,"IF(
+  {RE_tax_2nd_half_due_date} = BLANK(), BLANK(),
+  IF(
+    DATETIME_PARSE({RE_tax_2nd_half_due_date} & ""/"" & YEAR(TODAY()), ""M/D/YYYY"") < TODAY(),
+    DATETIME_PARSE({RE_tax_2nd_half_due_date} & ""/"" & (YEAR(TODAY())+1), ""M/D/YYYY""),
+    DATETIME_PARSE({RE_tax_2nd_half_due_date} & ""/"" & YEAR(TODAY()), ""M/D/YYYY"")
+  )
+)",Postgres generated column or view expression
+Investments,Date added,createdTime,date,,created_at timestamptz default now()
+Asset_detail,Asset_detail_id,formula,singleLineText,{Asset_number},Postgres generated column or view expression
+Asset_detail,Open_year,formula,number,YEAR({Open_date}),Postgres generated column or view expression
+Asset_detail,Last_renovation_year,multipleLookupValues,number,STR_comp_set.[Latest_renovation_date] via link [STR_comp_set_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Latest_actuals_date,rollup,date,Hotel_actuals.[Date] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,Investment_status,multipleLookupValues,singleSelect,Investments.[Investment_status] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Asset_subclass,multipleLookupValues,singleSelect,Investments.[Asset_subclass] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Hotel_brand,multipleLookupValues,singleSelect,Hotel_brand_metrics.[Hotel_brand] via link [Hotel_brand_metrics_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Brand_acronym,multipleLookupValues,singleSelect,Hotel_brand_metrics.[Brand_acronym] via link [Hotel_brand_metrics_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Scale,multipleLookupValues,singleSelect,Hotel_brand_metrics.[Scale] via link [Hotel_brand_metrics_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Renovation_plan_start,formula,date,"IF({PIP_brand_renovation_due_date}=BLANK()
+,BLANK()
+,DATEADD(
+  DATEADD({PIP_brand_renovation_due_date},1,'day')
+  ,-9,'month')
+)",Postgres generated column or view expression
+Asset_detail,Est_PIP_cost,formula,currency,{Est_PIP_cost_per_key}*{Room_count},Postgres generated column or view expression
+Asset_detail,Appfolio_valuation,multipleLookupValues,currency,Investments.[Appfolio_value] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,LTV,multipleLookupValues,percent,Investments.[LTV] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,TTM_LTV,multipleLookupValues,percent,Investments.[TTM_LTV] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Target_operating_balance,multipleLookupValues,currency,Investments.[Target_operating_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Target_reserve_balance,multipleLookupValues,currency,Investments.[Target_reserve_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,TTM_total_operating_revenue,rollup,currency,Hotel_actuals.[Total_operating_revenue] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,TTM_NOI,rollup,currency,Hotel_actuals.[EBITDA_NOI] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,TTM_adjusted_NOI,rollup,currency,Hotel_actuals.[Adjusted_NOI] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,TTM_debt_payment,rollup,currency,Hotel_actuals.[Monthly_debt_payment_manual_input] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,Monthly_debt_payment,multipleLookupValues,currency,Investments.[Monthly_debt_payment] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,TTM_cash_flow,formula,currency,{TTM_NOI}-{TTM_debt_payment},Postgres generated column or view expression
+Asset_detail,Latest_month_NOI,rollup,currency,Hotel_actuals.[EBITDA_NOI] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,Latest_month_dscr,formula,number,{Latest_month_adjusted_NOI}/{Monthly_debt_payment},Postgres generated column or view expression
+Asset_detail,Latest_debt_balance,rollup,currency,Investments.[Latest_debt_balance] via link [Investments_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,Total_contributed,multipleLookupValues,currency,Investments.[Total_contributed] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Total_cost,formula,currency,{Total_contributed}+{Total_loan_principal},Postgres generated column or view expression
+Asset_detail,TTM_DSCR,formula,number,{TTM_adjusted_NOI}/{TTM_debt_payment},Postgres generated column or view expression
+Asset_detail,TTM_debt_yield,formula,percent,{TTM_NOI}/{Latest_debt_balance},Postgres generated column or view expression
+Asset_detail,TTM_ADR,formula,currency,"IF(ISERROR({TTM_room_revenue}/{TTM_rooms_sold}),0,{TTM_room_revenue}/{TTM_rooms_sold})",Postgres generated column or view expression
+Asset_detail,TTM_occupancy_%,formula,percent,"IF(ISERROR({TTM_rooms_sold}/{TTM_available_rooms}),0,{TTM_rooms_sold}/{TTM_available_rooms})",Postgres generated column or view expression
+Asset_detail,TTM_RevPar,formula,currency,{TTM_ADR}*{TTM_occupancy_%},Postgres generated column or view expression
+Asset_detail,Tax_sale_year,formula,number,"IF({Sale_date}=BLANK(),BLANK(),YEAR({Sale_date}))",Postgres generated column or view expression
+Asset_detail,Renovation_plan_start_year,formula,number,"IF({Renovation_plan_start}=BLANK()
+,BLANK()
+,YEAR({Renovation_plan_start})
+)",Postgres generated column or view expression
+Asset_detail,TTM_GOP,rollup,currency,Hotel_actuals.[Gross_operating_profit] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,TTM_GOP_%,formula,percent,"IF(ISERROR({TTM_GOP}/{TTM_total_operating_revenue}),0,{TTM_GOP}/{TTM_total_operating_revenue})",Postgres generated column or view expression
+Asset_detail,Created_time,createdTime,dateTime,,created_at timestamptz default now()
+Asset_detail,Last_modified_by,lastModifiedBy,,,set by app / auth.uid()
+Asset_detail,TTM_valuation,multipleLookupValues,currency,Investments.[TTM_valuation] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Valuation_variance,formula,currency, {TTM_valuation}-{Appfolio_valuation},Postgres generated column or view expression
+Asset_detail,TTM_cap_rate,multipleLookupValues,percent,Investments.[Latest_cap_rate] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,YTD_rooms_sold,rollup,number,Hotel_actuals.[Occupied_rooms] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,YTD_available_rooms,rollup,number,Hotel_actuals.[Available_rooms] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,YTD_occupancy_%,formula,percent,"IF(ISERROR({YTD_rooms_sold}/{YTD_available_rooms}),0,{YTD_rooms_sold}/{YTD_available_rooms})",Postgres generated column or view expression
+Asset_detail,YTD_room_revenue,rollup,currency,Hotel_actuals.[Rooms_sales] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,YTD_ADR,formula,currency,"IF(ISERROR({YTD_room_revenue}/{YTD_rooms_sold}),0,{YTD_room_revenue}/{YTD_rooms_sold})",Postgres generated column or view expression
+Asset_detail,YTD_RevPAR,formula,currency,{YTD_occupancy_%}*{YTD_ADR},Postgres generated column or view expression
+Asset_detail,TTM_rooms_sold,rollup,number,Hotel_actuals.[Occupied_rooms] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,TTM_available_rooms,rollup,number,Hotel_actuals.[Available_rooms] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,TTM_room_revenue,rollup,currency,Hotel_actuals.[Rooms_sales] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,Asset_age,formula,number,"IF({Open_year}=BLANK(),{Open_year},YEAR(TODAY())-{Open_year})",Postgres generated column or view expression
+Asset_detail,Rate_reset,multipleLookupValues,date,Investments.[Interest_rate_reset_date] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,DOS_tenure_years,formula,number,"IF({DOS_hire_date} = BLANK(), BLANK(), DATETIME_DIFF(TODAY(), {DOS_hire_date}, 'Months')/12)",Postgres generated column or view expression
+Asset_detail,GM_tenure_years,formula,number,"IF({GM_hire_date} = BLANK(), BLANK(), DATETIME_DIFF(TODAY(), {GM_hire_date}, 'months')/12)",Postgres generated column or view expression
+Asset_detail,SM_tenure_years,formula,number,"IF({SM_hire_date} = BLANK(), BLANK(), DATETIME_DIFF(TODAY(), {SM_hire_date}, 'months')/12)",Postgres generated column or view expression
+Asset_detail,YTD_Revenue_actual,rollup,currency,Hotel_actuals.[Total_operating_revenue] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,YTD_Revenue_budget,rollup,currency,Hotel_budget.[Total_operating_revenue] via link [Hotel_budget_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,YTD_GOP_actual,rollup,currency,Hotel_actuals.[Gross_operating_profit] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,YTD_GOP_budget,rollup,currency,Hotel_budget.[Gross_operating_profit] via link [Hotel_budget_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,Loan_maturity,multipleLookupValues,date,Investments.[Loan_maturity] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Latest_valuation_balance,multipleLookupValues,currency,Investments.[Latest_valuation] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Construction_start_quarter,formula,singleLineText,"IF({Construction_start_date}=BLANK(),BLANK(),""Q""&DATETIME_FORMAT({Construction_start_date},'Q'))",Postgres generated column or view expression
+Asset_detail,Construction_start_year,formula,number,"IF({Construction_start_date}=BLANK(),BLANK(),YEAR({Construction_start_date}))",Postgres generated column or view expression
+Asset_detail,Construction_start_month,formula,number,"IF({Construction_start_date}=BLANK(),BLANK(),MONTH({Construction_start_date}))",Postgres generated column or view expression
+Asset_detail,Renovation_target_year,formula,number,"IF(
+  {Renovation_internal_target_end_date}=BLANK(),
+  BLANK(),
+  YEAR({Renovation_internal_target_end_date})
+)",Postgres generated column or view expression
+Asset_detail,Renovation_target_quarter,formula,singleLineText,"IF({Renovation_internal_target_end_date}=BLANK(),BLANK(),""Q""&DATETIME_FORMAT(({Renovation_internal_target_end_date}),'Q'))",Postgres generated column or view expression
+Asset_detail,Renovation_target_month,formula,number,"IF({Renovation_internal_target_end_date}=BLANK(),BLANK(),MONTH({Renovation_internal_target_end_date})
+)",Postgres generated column or view expression
+Asset_detail,Brand_renovation_due_date_year,formula,number,"IF(ISERROR(YEAR({PIP_brand_renovation_due_date})),BLANK(),YEAR({PIP_brand_renovation_due_date}))",Postgres generated column or view expression
+Asset_detail,Hotel_franchise,multipleLookupValues,multipleRecordLinks,Investments.[Hotel_franchise] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Latest_forecast_date,rollup,date,Hotel_forecast.[Forecast_date] via link [Hotel_forecast_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,Clickup_asset_naming,formula,singleLineText,"{Asset_number}&"" - ""&{Franchise_acronym}&"" ""&{Market}",Postgres generated column or view expression
+Asset_detail,Franchise_acronym,multipleLookupValues,singleLineText,Hotel_brand_metrics.[Franchise_acronym] via link [Hotel_brand_metrics_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Remaining_franchise_term_years,formula,number,"IF({Franchise_expiration}=BLANK(),BLANK(),DATETIME_DIFF({Franchise_expiration},TODAY(),'months')/12)",Postgres generated column or view expression
+Asset_detail,Total_loan_principal,multipleLookupValues,currency,Investments.[Total_loan_principal] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Reporting_category,multipleLookupValues,multipleSelects,Investments.[Reporting_category] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Latest_STR_28_day_trend_date,rollup,date,STR_28_day_trend.[End_date] via link [STR_28_day_trend_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,Latest_STR_weekly_trend_date,rollup,date,STR_weekly_data.[End_date] via link [STR_weekly_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,Latest_month_adjusted_NOI,rollup,currency,Hotel_actuals.[Adjusted_NOI] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,Operating_balance,multipleLookupValues,currency,Investments.[Operating_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Reserve_balance,multipleLookupValues,currency,Investments.[Reserve_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Latest_str_actuals_date,rollup,date,STR_actuals.[Date] via link [STR_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,YTD_NOI,rollup,currency,Hotel_actuals.[EBITDA_NOI] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,YTD_cash_flow,formula,currency,{YTD_NOI}- {Annual_debt_service},Postgres generated column or view expression
+Asset_detail,YTD_distributions,multipleLookupValues,currency,Investments.[2026_distributions] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Debt_per_key,multipleLookupValues,currency,Investments.[Debt_per_key] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Market_valuation,multipleLookupValues,currency,Investments.[Latest_valuation] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Market_value_per_key,multipleLookupValues,currency,Investments.[Value_per_key] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Supply_ttm,rollup,number,STR_actuals.[Supply] via link [STR_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,Demand_ttm,rollup,number,STR_actuals.[Demand] via link [STR_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,Revenue_ttm,rollup,currency,STR_actuals.[Revenue] via link [STR_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,ADR_TTM,formula,currency, {Revenue_ttm} / {Demand_ttm} ,Postgres generated column or view expression
+Asset_detail,Occupancy_TTM,formula,percent,{Demand_ttm} / {Supply_ttm},Postgres generated column or view expression
+Asset_detail,RevPAR_TTM,formula,currency,{Revenue_ttm} / {Supply_ttm},Postgres generated column or view expression
+Asset_detail,Annual_debt_service,rollup,currency,Hotel_actuals.[Monthly_debt_payment_manual_input] via link [Hotel_actuals_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Asset_detail,EBITDA_actuals_fcst_bud_2026,multipleLookupValues,currency,Investments.[2026_NOI_Act+Fcst+Bud] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Annual_debt_payment,multipleLookupValues,currency,Investments.[annual_debt_payment] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Asset_detail,Cashflow_Payment_type,rollup,singleLineText,Cash_flow_tracking.[Payment_type] via link [Cash_flow_tracking],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investments_market_value,Investments_market_value_id,formula,singleLineText,"{Investments_link}&"" - ""&MONTH({Date})&""_""&YEAR({Date})",Postgres generated column or view expression
+Investments_market_value,Contributed_capital,multipleLookupValues,currency,Investments.[Total_contributed] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Investment_status,multipleLookupValues,singleSelect,Investments.[Investment_status] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,TTM_adjusted_NOI,multipleLookupValues,currency,Investments.[Adj_TTM_NOI] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,TTM_valuation,formula,currency,{TTM_adjusted_NOI}/{Cap_rate},Postgres generated column or view expression
+Investments_market_value,TTM_vs_market_value,formula,currency,{TTM_valuation}-{Market_value},Postgres generated column or view expression
+Investments_market_value,Latest_cap_rate_date,multipleLookupValues,date,Investments.[Latest_cap_rate_date] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Latest_cap_rate,formula,percent,"IF({Latest_cap_rate_date}={Date},{Cap_rate},BLANK())",Postgres generated column or view expression
+Investments_market_value,Latest_valuation_date,multipleLookupValues,date,Investments.[Latest_valuation_date] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Latest_valuation,formula,currency,"IF({Date}={Latest_valuation_date},{Market_value})",Postgres generated column or view expression
+Investments_market_value,Cash_flow,multipleLookupValues,currency,Investments.[TTM_cash_flow] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Latest_debt_balance,multipleLookupValues,currency,Investments.[Latest_debt_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Net_equity_market_value,formula,currency,{Appfolio_value}-{Latest_debt_balance},Postgres generated column or view expression
+Investments_market_value,Room_count,multipleLookupValues,number,Investments.[Room_count] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,LTV,multipleLookupValues,percent,Investments.[LTV] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Value_per_key,multipleLookupValues,currency,Investments.[Value_per_key] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,TTM_value_per_key,formula,number,{TTM_valuation}/{Room_count},Postgres generated column or view expression
+Investments_market_value,TTM_vs_market_value_per_key,formula,currency,{TTM_value_per_key}-{Value_per_key},Postgres generated column or view expression
+Investments_market_value,TTM_LTV,formula,percent,{Latest_debt_balance}/{TTM_valuation},Postgres generated column or view expression
+Investments_market_value,Debt_per_key,formula,currency,{Latest_debt_balance}/{Room_count},Postgres generated column or view expression
+Investments_market_value,Net_equity_per_key_market_value,formula,currency,{Net_equity_market_value}/{Room_count},Postgres generated column or view expression
+Investments_market_value,Net_equity_per_key_TTM,formula,currency,({TTM_valuation}-{Latest_debt_balance})/{Room_count},Postgres generated column or view expression
+Investments_market_value,TTM_vs_market_LTV_variance,formula,percent,{TTM_LTV}- {LTV},Postgres generated column or view expression
+Investments_market_value,Net_equity_TTM,formula,currency,"{TTM_valuation}-{Latest_debt_balance}
+",Postgres generated column or view expression
+Investments_market_value,Hotel_brand,multipleLookupValues,multipleRecordLinks,Investments.[Hotel_franchise] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Asset_number,multipleLookupValues,singleLineText,Investments.[Asset_number] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Est_PIP_cost,multipleLookupValues,currency,Investments.[Est_PIP_cost] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,TTM_valuation_variance,multipleLookupValues,currency,Investments.[TTM_valuation_variance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Implied_cap_rate_TTM,multipleLookupValues,percent,Investments.[Implied_cap_rate_TTM] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Latest_debt_balance_date,multipleLookupValues,date,Investments.[Latest_debt_balance_date] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Renovation_plan_target_end_date,multipleLookupValues,date,Investments.[Renovation_internal_target_end_date] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Asset_age,multipleLookupValues,number,Investments.[Asset_age] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Appfolio_value_per_key,formula,currency,{Appfolio_value}/{Room_count},Postgres generated column or view expression
+Investments_market_value,Est_PIP_cost_per_key,multipleLookupValues,currency,Investments.[Est_PIP_cost_per_key] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investments_market_value,Remaining_franchise_term_years,multipleLookupValues,number,Investments.[Remaining_franchise_term_years] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investment_positions,Investment_positions_id,formula,singleLineText,"
+{Investment_id}&""_""&{Investing_entities_link}",Postgres generated column or view expression
+Investment_positions,Distributions_rollup,rollup,currency,Distributions.[Amount] via link [Distributions_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,Reporting_category_breakdown,multipleLookupValues,singleSelect,Investing_entities.[Reporting_category_breakdown] via link [Investing_entities_link],JOIN to the linked table in a view (returns array)
+Investment_positions,Created_time,createdTime,dateTime,,created_at timestamptz default now()
+Investment_positions,Last_modified_time,lastModifiedTime,dateTime,,updated_at timestamptz via trigger
+Investment_positions,Last_modified_by,lastModifiedBy,,,set by app / auth.uid()
+Investment_positions,L1_ownership_percentage_rollup,rollup,percent,Investment_positions.[L1_ownership_percentage] via link [L2_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,L2_net_ownership_percentage,formula,percent,({L1_ownership_percentage}*{L1_ownership_percentage_rollup}),Postgres generated column or view expression
+Investment_positions,AP_FamCo_ownership_flowthrough,formula,percent,{AP_FamCo_ownership_L2}+{AP_FamCo_ownership_L3},Postgres generated column or view expression
+Investment_positions,SP_FamCo_ownership_flowthrough,formula,percent,{SP_FamCo_ownership_L2}+{SP_FamCo_ownership_L3},Postgres generated column or view expression
+Investment_positions,L2_ownership_percentage_rollup,rollup,percent,Investment_positions.[L1_ownership_percentage] via link [L3_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,L3_net_ownership_percentage,formula,percent,({L1_ownership_percentage}*{L2_ownership_percentage_rollup}),Postgres generated column or view expression
+Investment_positions,AP_FamCo_ownership_L2,rollup,percent,Investment_positions.[L2_net_ownership_percentage] via link [From field: L2_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,SP_FamCo_ownership_L2,rollup,percent,Investment_positions.[L2_net_ownership_percentage] via link [From field: L2_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,AP_FamCo_ownership_L3_helper,rollup,percent,Investment_positions.[L3_net_ownership_percentage] via link [From field: L3_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,SP_FamCo_ownership_L3_helper,rollup,percent,Investment_positions.[L3_net_ownership_percentage] via link [From field: L3_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,Associated_asset_number,multipleLookupValues,singleLineText,Investments.[Associated_asset_number] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Investment_positions,Founders_Fund_ownership_L2,rollup,percent,Investment_positions.[L2_net_ownership_percentage] via link [From field: L2_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,Witness_external_ownership_flowthrough,formula,percent,{Witness_external_ownership_L2}+ {Witness_external_ownership_L3},Postgres generated column or view expression
+Investment_positions,Witness_external_ownership_L2,rollup,percent,Investment_positions.[L2_net_ownership_percentage] via link [From field: L2_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,Witness_external_ownership_L3_helper,rollup,percent,Investment_positions.[L3_net_ownership_percentage] via link [From field: L3_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,AP_FamCo_ownership_L3,rollup,percent,Investment_positions.[AP_FamCo_ownership_L3_helper] via link [From field: L2_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,SP_FamCo_ownership_L3,rollup,percent,Investment_positions.[SP_FamCo_ownership_L3_helper] via link [From field: L2_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,Witness_external_ownership_L3,rollup,percent,Investment_positions.[Witness_external_ownership_L3_helper] via link [From field: L2_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,Founders_fund_ownership_flowthrough,formula,percent,{Founders_Fund_ownership_L2}+{Founders_fund_ownership_L3},Postgres generated column or view expression
+Investment_positions,Founders_fund_ownership_L3_helper,rollup,percent,Investment_positions.[L3_net_ownership_percentage] via link [From field: L3_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Investment_positions,Founders_fund_ownership_L3,rollup,percent,Investment_positions.[Founders_fund_ownership_L3_helper] via link [From field: L2_ownership_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Distributions,Distributions_id,formula,singleLineText,"{Investment_positions_link_helper}&""_""&{Ref}",Postgres generated column or view expression
+Distributions,Month_number,formula,number,MONTH({Effective Date}),Postgres generated column or view expression
+Distributions,Year,formula,number,YEAR({Effective Date}),Postgres generated column or view expression
+Distributions,Quarter,formula,singleLineText,"LEFT({Period},2)",Postgres generated column or view expression
+Distributions,Investment_positions_link_helper,formula,singleLineText,"REGEX_REPLACE(CONCATENATE({Investments_link},""_"",{Investing_entities_link}), '""', """")",Postgres generated column or view expression
+Distributions,Ref,autoNumber,,,bigserial / row_number() — usually drop
+Distributions,Cash_flow_distribution,formula,currency,"IF({Source}=""Cash Flow"",{Amount},0)",Postgres generated column or view expression
+Distributions,Sale_of_property_distribution,formula,currency,"IF({Source}=""Sale of Property"",{Amount},0)",Postgres generated column or view expression
+Distributions,KV_FamCo,multipleLookupValues,singleSelect,Investment_positions.[Reporting_category_breakdown] via link [Investment_positions_link],JOIN to the linked table in a view (returns array)
+Distributions,Last_modified_by,lastModifiedBy,,,set by app / auth.uid()
+Distributions,Last_modified_time,lastModifiedTime,dateTime,,updated_at timestamptz via trigger
+Distributions,FamCo_family_unit,multipleLookupValues,,?.[None] via link [Investing_entities_link],JOIN to the linked table in a view (returns array)
+Distributions,Ownership %,multipleLookupValues,percent,Investment_positions.[L1_ownership_percentage] via link [Investment_positions_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Cash_accounts_id,formula,singleLineText,"{Investments_link}&"" - ""&{Lenders_link}&"" ""&{Cash_account_subclass}",Postgres generated column or view expression
+Cash_accounts,Asset_number,multipleLookupValues,singleLineText,Investments.[Asset_number] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Latest_cash_balance,rollup,currency,Cash_balance_input.[Latest_balance] via link [Cash_balance_input_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Cash_accounts,Reserve_balance,rollup,currency,Cash_balance_input.[Latest_balance] via link [Cash_balance_input_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Cash_accounts,Asset_subclass,multipleLookupValues,singleSelect,Investments.[Asset_subclass] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Operating_target_balance,multipleLookupValues,currency,Investments.[Target_operating_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Reserve_target_balance,multipleLookupValues,currency,Investments.[Target_reserve_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Latest_balance_date,rollup,date,Cash_balance_input.[Date] via link [Cash_balance_input_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Cash_accounts,Quarter_end_cash_balance,rollup,currency,Cash_balance_input.[Balance] via link [Cash_balance_input_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Cash_accounts,Cash_balance_variance,formula,currency,"IF(
+IF(
+  OR({Cash_account_subclass} = ""Operating - PIP"", {Cash_account_subclass} = BLANK()),
+    BLANK(),
+    IF(
+      {Cash_account_subclass} = ""Operating"",
+
+        {Latest_cash_balance} - {Operating_target_balance},
+        IF(
+        OR({Cash_account_subclass} = ""Reserve"", {Cash_account_subclass} = ""Reserve-Holding""),
+          {Latest_cash_balance} - {Reserve_target_balance},
+          BLANK()
+      )
+    )
+) <0
+,BLANK(),
+IF(
+  OR({Cash_account_subclass} = ""Operating - PIP"", {Cash_account_subclass} = BLANK()),
+    BLANK(),
+    IF(
+      {Cash_account_subclass} = ""Operating"",
+
+        {Latest_cash_balance} - {Operating_target_balance},
+        IF(
+        OR({Cash_account_subclass} = ""Reserve"", {Cash_account_subclass} = ""Reserve-Holding""),
+          {Latest_cash_balance} - {Reserve_target_balance},
+          BLANK()
+      )
+    )
+)
+)",Postgres generated column or view expression
+Cash_accounts,Operating_balance,rollup,currency,Cash_balance_input.[Latest_balance] via link [Cash_balance_input_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Cash_accounts,Operating_balance_variance,formula,currency,{Operating_balance}-{Operating_target_balance},Postgres generated column or view expression
+Cash_accounts,Reserve_balance_by_entity,multipleLookupValues,currency,Investments.[Reserve_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Reserve_balance_entity_variance,formula,currency,{Reserve_balance_by_entity}-{Reserve_target_balance},Postgres generated column or view expression
+Cash_accounts,Reserve_balance_variance,formula,currency,{Reserve_balance}-{Reserve_target_balance},Postgres generated column or view expression
+Cash_accounts,Renovation_plan_target_end_date,multipleLookupValues,date,Investments.[Renovation_internal_target_end_date] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Est_PIP_cost,multipleLookupValues,currency,Investments.[Est_PIP_cost] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Upcoming_PIP_target_met,formula,singleLineText,"IF(
+  AND(
+    {PIP_funding_strategy} = ""Cash Flow"",
+    {Reserve_balance_by_entity} > {Est_PIP_cost},
+    {Time_until_PIP} <= 730,
+    {Time_until_PIP} > 0,
+    {Time_until_PIP}!= BLANK()
+    ),
+    ""Yes"",
+    IF(
+      AND(
+        {PIP_funding_strategy} = ""Cash Flow"",
+        {Reserve_balance_by_entity} < {Est_PIP_cost},
+        {Time_until_PIP} <= 730,
+        {Time_until_PIP} > 0,
+        {Time_until_PIP}!= BLANK()
+      ),
+      ""No"",
+      """"
+    )
+)",Postgres generated column or view expression
+Cash_accounts,Reserve_to_PIP_variance,formula,currency,"IF({Reserve_last_four}=BLANK()
+,BLANK()
+,{Reserve_balance_by_entity}-{Est_PIP_cost}
+)",Postgres generated column or view expression
+Cash_accounts,Investment_status,multipleLookupValues,singleSelect,Investments.[Investment_status] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Cresset_naming_convention,formula,singleLineText,"{Investments_link}&""_""&{Lenders_link}&""_""&{Cash_account_subclass}&""_""&{Account_last_four}",Postgres generated column or view expression
+Cash_accounts,Cash_balance_action,formula,singleLineText,"IF(
+  AND(
+    {Account_status} = ""Active"",
+    {Cash_account_subclass} = ""Operating"",
+    OR(
+      {Investment_status} = ""Active"",
+      {Investment_status} = ""Active - Construction"",
+      {Investment_status} = ""Pending Sale"",
+      {Investment_status} = ""Recap""
+    ),
+    {Cash_account_subclass} = ""Operating"",
+    {Operating_balance_variance} < 0,
+    {Reserve_balance_by_entity} > 0
+  ),
+  ""Monitor Operating account or Fund with Reserve"",
+  IF(
+    AND(
+      {Account_status} = ""Active"",
+      {Cash_account_subclass} = ""Operating"",
+      OR(
+        {Investment_status} = ""Active"",
+        {Investment_status} = ""Active - Construction"",
+        {Investment_status} = ""Pending Sale"",
+        {Investment_status} = ""Recap""
+      ),
+      {Cash_account_subclass} = ""Operating"",
+      {Operating_balance} + {Reserve_balance_by_entity} < {Operating_target_balance}
+    ),
+    ""Consider Capital Call"",
+    IF(
+      AND(
+        {Account_status} = ""Active"",
+        {Cash_account_subclass} = ""Operating"",
+        OR(
+          {Investment_status} = ""Active"",
+          {Investment_status} = ""Active - Construction"",
+          {Investment_status} = ""Pending Sale"",
+          {Investment_status} = ""Recap""
+        ),
+        {Cash_account_subclass} = ""Operating"",
+        {Operating_balance_variance} > 50000,
+        {Reserve_balance_entity_variance} < 0
+      ),
+      ""Fund Reserve"",
+      IF(
+        AND(
+          {Account_status} = ""Active"",
+          {Cash_account_subclass} = ""Operating"",
+          OR(
+            {Investment_status} = ""Active"",
+            {Investment_status} = ""Active - Construction"",
+            {Investment_status} = ""Pending Sale"",
+            {Investment_status} = ""Recap""
+          ),
+          {Cash_account_subclass} = ""Operating"",
+          {Operating_balance_variance} > 100000,
+          {Reserve_balance_entity_variance} >= 0
+        ),
+        ""Distribute funds"",
+        IF(
+          AND(
+            {Account_status} = ""Active"",
+            {Cash_account_subclass} = ""Reserve"",
+            OR(
+              {Investment_status} = ""Active"",
+              {Investment_status} = ""Active - Construction"",
+              {Investment_status} = ""Pending Sale"",
+              {Investment_status} = ""Recap""
+            ),
+            {Cash_account_subclass} = ""Reserve"",
+            OR(
+              {Upcoming_PIP_target_met} = ""Yes"",
+              {Upcoming_PIP_target_met} = BLANK()
+            ),
+            {Reserve_balance_entity_variance} > 100000
+          ),
+          ""Transfer to Operating for Distribution"",
+          """"
+        )
+      )
+    )
+  )
+)",Postgres generated column or view expression
+Cash_accounts,Cash_action_amount,formula,currency,"IF(AND({Cash_balance_action}=""Monitor Operating account or Fund with Reserve"", {Cash_account_subclass}=""Operating""),
+    -ROUNDDOWN({Operating_balance_variance},-3),
+IF(
+  {Cash_balance_action}=""Consider Capital Call"",
+  ROUNDUP({Operating_target_balance} - {Operating_balance} - {Reserve_balance_by_entity},-4),
+  IF(
+    {Cash_balance_action}=""Fund Reserve"",
+    ROUNDDOWN({Operating_balance_variance},-4),
+    IF(AND({Cash_balance_action}=""Distribute funds"", {Cash_account_subclass}=""Operating""),
+    ROUNDDOWN({Operating_balance_variance},-4),
+    IF(AND({Cash_balance_action}=""Transfer to Operating for Distribution"", {Cash_account_subclass}=""Reserve""),
+    ROUNDDOWN({Reserve_balance_variance},-4),
+    BLANK()
+
+    )
+
+    )
+  )
+)
+)",Postgres generated column or view expression
+Cash_accounts,PIP_funding_strategy,multipleLookupValues,singleSelect,Investments.[PIP_funding_strategy] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Time_until_PIP,formula,number,"IF({Renovation_plan_target_end_date}=BLANK(),BLANK(),DATETIME_DIFF({Renovation_plan_target_end_date},TODAY(),'days'))",Postgres generated column or view expression
+Cash_accounts,Operating_balance_by_entity,multipleLookupValues,currency,Investments.[Operating_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Monthly_debt_payment,multipleLookupValues,currency,Investments.[Monthly_debt_payment] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Owner_comment_last_modified_time,lastModifiedTime,dateTime,,updated_at timestamptz via trigger
+Cash_accounts,Owner_comment_last_modified_by,lastModifiedBy,,,set by app / auth.uid()
+Cash_accounts,Monthly_debt_payment_date,multipleLookupValues,number,Investments.[Monthly_debt_payment_date] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Last_modified_time_cresset_position_ID,lastModifiedTime,dateTime,,updated_at timestamptz via trigger
+Cash_accounts,Created_time,createdTime,dateTime,,created_at timestamptz default now()
+Cash_accounts,CY_interest_income_estimate,formula,currency,"IF({YTD_avg_daily_interest_income}>0,
+{YTD_avg_daily_interest_income}*365
+,
+BLANK()
+)",Postgres generated column or view expression
+Cash_accounts,YTD_avg_daily_interest_income,rollup,currency,Cash_balance_input.[Daily_interest] via link [Cash_balance_input_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Cash_accounts,State,multipleLookupValues,singleSelect,Investments.[State] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_accounts,Record_id,formula,singleLineText,RECORD_ID(),Postgres generated column or view expression
+Cash_accounts,Reporting_category,multipleLookupValues,multipleSelects,Investments.[Reporting_category] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_balance_input,Cash_balance_input_id,formula,singleLineText,"{Cash_accounts_link}&"" - ""&MONTH({Date})&""_""&DAY({Date})&""_""&YEAR({Date})",Postgres generated column or view expression
+Cash_balance_input,Month,formula,number,MONTH({Date}),Postgres generated column or view expression
+Cash_balance_input,Day,formula,number,DAY({Date}),Postgres generated column or view expression
+Cash_balance_input,Year,formula,number,YEAR({Date}),Postgres generated column or view expression
+Cash_balance_input,Lender,multipleLookupValues,multipleRecordLinks,Cash_accounts.[Lenders_link] via link [Cash_accounts_link],JOIN to the linked table in a view (returns array)
+Cash_balance_input,Cash_account_subclass,multipleLookupValues,singleSelect,Cash_accounts.[Cash_account_subclass] via link [Cash_accounts_link],JOIN to the linked table in a view (returns array)
+Cash_balance_input,Latest_balance_date,multipleLookupValues,date,Cash_accounts.[Latest_balance_date] via link [Cash_accounts_link],JOIN to the linked table in a view (returns array)
+Cash_balance_input,Latest_balance,formula,currency,"IF({Latest_balance_date}={Date},{Balance})",Postgres generated column or view expression
+Cash_balance_input,Included_in_YTD,formula,singleLineText,"IF({Year}=YEAR(TODAY()),""Yes"","""")",Postgres generated column or view expression
+Cash_balance_input,Daily_interest,formula,currency,"IF(OR({Cash_account_subclass}=""Reserve"", {Cash_account_subclass}=""Reserve-Holding"")
+,{Balance}*.043/365
+,BLANK()
+)",Postgres generated column or view expression
+Cash_balance_input,Asset_number,multipleLookupValues,singleLineText,Investments.[Asset_number] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Cash_balance_input,Created_time,createdTime,dateTime,,created_at timestamptz default now()
+Cash_balance_input,Last_modified_by,lastModifiedBy,,,set by app / auth.uid()
+Cash_balance_input,Last_modified_time,lastModifiedTime,dateTime,,updated_at timestamptz via trigger
+Loan_summary_data,Loan_summary_data_id,formula,singleLineText,"{Investments_link}&""_""&{Loan_type}",Postgres generated column or view expression
+Loan_summary_data,Latest_balance_date,rollup,date,Loan_balance_input.[Date] via link [Loan_balance_input_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Loan_summary_data,Latest_debt_balance,rollup,currency,Loan_balance_input.[Latest_balance] via link [Loan_balance_input_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Loan_summary_data,Investment_location_state,multipleLookupValues,singleSelect,Investments.[State] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,Asset_number,multipleLookupValues,singleLineText,Investments.[Asset_number] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,Reporting_category,multipleLookupValues,multipleSelects,Investments.[Reporting_category] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,Investment_status,multipleLookupValues,singleSelect,Investments.[Investment_status] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,Annual_debt_payment,formula,currency,{Monthly_debt_payment}*12,Postgres generated column or view expression
+Loan_summary_data,TTM_noi,multipleLookupValues,currency,Investments.[TTM_NOI] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,TTM_debt_yield,multipleLookupValues,percent,Investments.[TTM_debt_yield] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,TTM_dscr,multipleLookupValues,number,Investments.[TTM_DSCR] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,TTM_debt_yield_variance,formula,percent,"IF(OR({TTM_debt_yield}=BLANK(),{Debt_yield_covenant}=BLANK()),
+BLANK(),
+{TTM_debt_yield}-{Debt_yield_covenant})",Postgres generated column or view expression
+Loan_summary_data,TTM_dscr_variance,formula,number,"IF(OR({TTM_dscr}=BLANK(),{DSCR_covenant}=BLANK()),
+BLANK(),
+  {TTM_dscr}-{DSCR_covenant})",Postgres generated column or view expression
+Loan_summary_data,TTM_dscr_covenant_test,formula,singleLineText,"IF({TTM_dscr_variance}<0,""Non-Compliant"","""")",Postgres generated column or view expression
+Loan_summary_data,Rate_maturity_year,formula,singleLineText,"IF(ISERROR(YEAR({Interest_rate_reset_date})),"""",YEAR({Interest_rate_reset_date}))",Postgres generated column or view expression
+Loan_summary_data,Loan_maturity_year,formula,number,YEAR({Loan_maturity}),Postgres generated column or view expression
+Loan_summary_data,Hotel_anonymous_reference,multipleLookupValues,singleLineText,Investments.[Hotel_anonymous_reference] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,Market_LTV,multipleLookupValues,percent,Investments.[LTV] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,TTM_LTV,multipleLookupValues,percent,Investments.[TTM_LTV] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,LTV_variance,formula,percent,{Market_LTV}-{TTM_LTV},Postgres generated column or view expression
+Loan_summary_data,Latest_quarter_debt_paydown,formula,currency,{Latest_quarter_beginning_balance}-{Latest_debt_balance},Postgres generated column or view expression
+Loan_summary_data,Latest_quarter_beginning_balance,rollup,currency,Loan_balance_input.[Debt_balance] via link [Loan_balance_input_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Loan_summary_data,Latest_month_DSCR,multipleLookupValues,number,Investments.[Latest_month_DSCR] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,TTM_GOP,multipleLookupValues,currency,Investments.[TTM_GOP] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,TTM_total_operating_revenue,multipleLookupValues,currency,Investments.[TTM_total_operating_revenue] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,Internal_asset_name,multipleLookupValues,singleLineText,Investments.[Internal_asset_name] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,Asset_subclass,multipleLookupValues,singleSelect,Investments.[Asset_subclass] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_summary_data,SP_guarantee,multipleLookupValues,singleSelect,Guarantor_Compliance.[Liability_structure] via link [Guarantor_Compliance],JOIN to the linked table in a view (returns array)
+Loan_summary_data,AP_guarantee,multipleLookupValues,singleSelect,Guarantor_Compliance.[Liability_structure] via link [Guarantor_Compliance],JOIN to the linked table in a view (returns array)
+Loan_balance_input,Loan_balance_input_id,formula,singleLineText,"{Loan_summary_data_link}&""_""&MONTH({Date})&""_""&YEAR({Date})",Postgres generated column or view expression
+Loan_balance_input,Asset_number,multipleLookupValues,singleLineText,Investments.[Asset_number] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Loan_balance_input,Month,formula,number,MONTH({Date}),Postgres generated column or view expression
+Loan_balance_input,Year,formula,number,YEAR({Date}),Postgres generated column or view expression
+Loan_balance_input,Latest_balance_date,multipleLookupValues,date,Loan_summary_data.[Latest_balance_date] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Loan_balance_input,Latest_balance,formula,currency,"IF({Latest_balance_date}={Date},{Debt_balance})",Postgres generated column or view expression
+Loan_balance_input,Record_created_by,createdBy,,,set by app / auth.uid()
+Loan_balance_input,Modified_by,lastModifiedTime,dateTime,,updated_at timestamptz via trigger
+Short_term_loans,Balance Sheet Primary Key,formula,singleLineText,"{Asset Owner}&"" - ""&{Investment Name}",Postgres generated column or view expression
+Short_term_loans,Asset Owner Helper,formula,singleLineText,"IF({Lender (Individual)}=BLANK(),{Lender (Business)},{Lender (Individual)})",Postgres generated column or view expression
+Short_term_loans,Investment Name,formula,singleLineText,"""Loan to ""&{Borrower}",Postgres generated column or view expression
+Short_term_loans,Cresset_naming_convention,formula,singleLineText,{Investment Name},Postgres generated column or view expression
+Hotel_budget,Hotel_budget_id,formula,singleLineText,"{Asset_number}&""_""&MONTH({Date})&""_""&YEAR({Date})",Postgres generated column or view expression
+Hotel_budget,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_budget,Month,formula,number,MONTH({Date}),Postgres generated column or view expression
+Hotel_budget,Year,formula,number,YEAR({Date}),Postgres generated column or view expression
+Hotel_budget,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_budget,Occupancy_%,formula,percent,"IF({Available_rooms}=BLANK(),BLANK(),
+{Occupied_rooms}/{Available_rooms})",Postgres generated column or view expression
+Hotel_budget,GOP_%,formula,percent,{Gross_operating_profit}/{Total_operating_revenue},Postgres generated column or view expression
+Hotel_budget,Monthly_debt_payment,formula,currency,{Monthly_debt_payment_lookup},Postgres generated column or view expression
+Hotel_budget,Cash_flow,formula,currency,{EBITDA_NOI} -{Monthly_debt_payment_lookup},Postgres generated column or view expression
+Hotel_budget,DSCR,formula,number,{Adjusted_NOI}/{Monthly_debt_payment_lookup},Postgres generated column or view expression
+Hotel_budget,Brand,multipleLookupValues,multipleRecordLinks,Asset_detail.[Hotel_brand_metrics_link] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_budget,NOI_less_donation,formula,currency,{EBITDA_NOI}-{Occupied_rooms},Postgres generated column or view expression
+Hotel_budget,NOI_%,formula,percent,{EBITDA_NOI}/{Total_operating_revenue},Postgres generated column or view expression
+Hotel_budget,Full_year_total_GOP_%,formula,percent,{Full_year_total_GOP}/{Full_year_total_operating_revenue},Postgres generated column or view expression
+Hotel_budget,Prior_year_total_GOP_%,formula,percent,{Prior_year_total_GOP}/{Prior_year_total_operating_revenue},Postgres generated column or view expression
+Hotel_budget,Latest_financials_date,multipleLookupValues,date,Asset_detail.[Latest_actuals_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_budget,Included_in_YTD,formula,singleLineText,"IF( 
+  AND(YEAR({Latest_financials_date}) = YEAR({Date}), 
+  OR({Acquisition_date}, {Open_date}), 
+  NOT( IS_BEFORE( {Date}, IF({Acquisition_date}, {Acquisition_date}, {Open_date}) ) ), 
+  NOT(IS_AFTER({Date}, {Latest_financials_date})) ), 
+  ""Yes"", 
+  ""No"" 
+  )",Postgres generated column or view expression
+Hotel_budget,Latest_forecast_date,multipleLookupValues,date,Investments.[Latest_forecast_date] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Hotel_budget,Included_in_budget_ex_fcst,formula,singleLineText,"IF(
+  {Latest_forecast_date},
+  IF(IS_AFTER({Date}, {Latest_forecast_date}), ""Yes"", """"),
+  IF(IS_AFTER({Date}, DATEADD({Latest_financials_date}, 1, 'months')), ""Yes"", """")
+)",Postgres generated column or view expression
+Hotel_budget,Adjusted_NOI,formula,currency,{EBITDA_NOI}-{Total_operating_revenue}*0.04,Postgres generated column or view expression
+Hotel_budget,Acquisition_date,multipleLookupValues,date,Asset_detail.[Acquired_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_budget,Open_date,multipleLookupValues,date,Asset_detail.[Open_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_budget,Monthly_debt_payment_lookup,multipleLookupValues,currency,Hotel_actuals.[Monthly_debt_payment_manual_input] via link [Hotel_actuals],JOIN to the linked table in a view (returns array)
+Witness_AM_forecast,Witness_AM_forecast_id,formula,singleLineText,"{Asset_number}&""_""&MONTH({Date})&""_""&YEAR({Date})",Postgres generated column or view expression
+Witness_AM_forecast,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Witness_AM_forecast,Month,formula,number,MONTH({Date}),Postgres generated column or view expression
+Witness_AM_forecast,Year,formula,number,YEAR({Date}),Postgres generated column or view expression
+Witness_AM_forecast,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Witness_AM_forecast,Occupancy_%,formula,percent,"IF({Available_rooms}=BLANK(),BLANK(),
+{Occupied_rooms}/{Available_rooms})",Postgres generated column or view expression
+Witness_AM_forecast,GOP_%,formula,percent,{Gross_operating_profit}/{Total_operating_revenue},Postgres generated column or view expression
+Witness_AM_forecast,Monthly_debt_payment,multipleLookupValues,currency,Asset_detail.[Monthly_debt_payment] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Witness_AM_forecast,Cash_flow,formula,currency,{EBITDA_NOI} -{Monthly_debt_payment},Postgres generated column or view expression
+Witness_AM_forecast,DSCR,formula,number,{EBITDA_NOI}/{Monthly_debt_payment},Postgres generated column or view expression
+Witness_AM_forecast,NOI_less_reserve,formula,currency,{EBITDA_NOI}-({Total_operating_revenue}*.03),Postgres generated column or view expression
+Witness_AM_forecast,Brand,multipleLookupValues,multipleRecordLinks,Asset_detail.[Hotel_brand_metrics_link] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Witness_AM_forecast,NOI_less_donation,formula,currency,{EBITDA_NOI}-{Occupied_rooms},Postgres generated column or view expression
+Witness_AM_forecast,NOI_%,formula,percent,{EBITDA_NOI}/{Total_operating_revenue},Postgres generated column or view expression
+Witness_AM_forecast,Full_year_total_GOP_%,formula,percent,{Full_year_total_GOP}/{Full_year_total_operating_revenue},Postgres generated column or view expression
+Witness_AM_forecast,Prior_year_total_GOP_%,formula,percent,{Prior_year_total_GOP}/{Prior_year_total_operating_revenue},Postgres generated column or view expression
+Witness_AM_forecast,Latest_financials_date,multipleLookupValues,date,Asset_detail.[Latest_actuals_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Witness_AM_forecast,Included_in_YTD,formula,singleLineText,"IF(
+  AND(
+    YEAR({Date}) = YEAR({Latest_financials_date}),
+    {Date} <= {Latest_financials_date}
+  ),
+  ""Yes"",
+  ""No""
+)",Postgres generated column or view expression
+Witness_AM_forecast,Latest_forecast_date,multipleLookupValues,date,Investments.[Latest_forecast_date] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Witness_AM_forecast,Included_in_budget_ex_fcst,formula,singleLineText,"IF(
+  ({Latest_forecast_date}=BLANK())+({Date}<={Latest_forecast_date})
+  ,"""",""Yes"")",Postgres generated column or view expression
+Witness_AM_forecast,Adjusted_NOI,formula,currency,{EBITDA_NOI}-{Total_operating_revenue}*0.04,Postgres generated column or view expression
+Hotel_forecast,Hotel_forecast_id,formula,singleLineText,"{Asset_number}&""_""&(MONTH({Forecast_period}))&""_""&YEAR({Forecast_date})&""_""&{Forecast_type}",Postgres generated column or view expression
+Hotel_forecast,Forecast_period,formula,date,"IF(
+  {Forecast_type} = ""30"",
+    DATEADD(DATEADD({Forecast_date}, 1, 'month'), -1, 'day'),
+    IF(
+      {Forecast_type} = ""60"",
+        DATEADD(DATEADD({Forecast_date}, 2, 'month'), -1, 'day'),
+        IF(
+          {Forecast_type} = ""90"",
+            DATEADD(DATEADD({Forecast_date}, 3, 'month'), -1, 'day'),
+            BLANK()
+        )
+    )
+)",Postgres generated column or view expression
+Hotel_forecast,Latest_forecast_check,formula,singleLineText,"IF(
+  OR(
+    {Forecast_date} = {Latest_forecast_date},
+    {Forecast_type} = 30
+  ),
+  ""Yes"",
+  """"
+)",Postgres generated column or view expression
+Hotel_forecast,Latest_forecast_date,multipleLookupValues,date,Asset_detail.[Latest_forecast_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_forecast,Profitsword_hotel_name,multipleLookupValues,singleLineText,Asset_detail.[Profitsword_hotel_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_forecast,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_forecast,Latest_actuals_date,multipleLookupValues,date,Asset_detail.[Latest_actuals_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_forecast,GOP_%,formula,percent,{Gross_operating_profit}/{Total_operating_revenue},Postgres generated column or view expression
+Hotel_forecast,NOI_%,formula,percent,{EBITDA_NOI}/{Total_operating_revenue},Postgres generated column or view expression
+Hotel_forecast,Year,formula,number,YEAR({Forecast_period}),Postgres generated column or view expression
+Hotel_forecast,Adjusted_NOI,formula,currency,{EBITDA_NOI}-{Total_operating_revenue}*0.04,Postgres generated column or view expression
+Hotel_forecast,Monthly_debt_payment,multipleLookupValues,currency,Hotel_actuals.[Monthly_debt_payment_manual_input] via link [Hotel_actuals_link],JOIN to the linked table in a view (returns array)
+Hotel_forecast,Hotel_forecast_id copy,formula,singleLineText,"{Asset_number}&""_""&(MONTH({Forecast_period}))&""_""&YEAR({Forecast_date})",Postgres generated column or view expression
+Hotel_forecast,Latest_forecast_rollup_filter,formula,singleLineText,"IF(
+  AND(
+    {Latest_forecast_check} = ""Yes"",
+      IS_AFTER({Forecast_period}, {Latest_actuals_date})
+    )
+  ,
+  ""Yes"",
+  """"
+)",Postgres generated column or view expression
+Quarterly_hotel_actuals,Quarterly_hotel_actuals_id,formula,singleLineText,"{Asset_number}&""_""&""Q""&DATETIME_FORMAT({Date},""Q_YYYY"")",Postgres generated column or view expression
+Quarterly_hotel_actuals,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Quarterly_hotel_actuals,Investment_status,multipleLookupValues,singleSelect,Asset_detail.[Investment_status] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Quarterly_hotel_actuals,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Quarterly_hotel_actuals,GOP_per_available_room,formula,currency,{Gross_operating_profit}/{Available_rooms},Postgres generated column or view expression
+Quarterly_hotel_actuals,EBITDA_per_available_room,formula,currency,{EBITDA}/{Available_rooms},Postgres generated column or view expression
+Quarterly_hotel_actuals,Budget_GOP_per_available_room,formula,currency,{Budget_gross_operating_profit}/{Budget_available_rooms},Postgres generated column or view expression
+Quarterly_hotel_actuals,Budget_EBITDA_per_available_room,formula,currency,{Budget_EBITDA}/{Budget_available_rooms},Postgres generated column or view expression
+Quarterly_hotel_actuals,PY_GOP_per_available_room,formula,currency,{PY_gross_operating_profit}/{PY_Available Rooms},Postgres generated column or view expression
+Quarterly_hotel_actuals,PY_EBITDA_per_available_room,formula,currency,{PY_EBITDA}/{PY_Available Rooms},Postgres generated column or view expression
+Quarterly_hotel_actuals,Latest_quarter_debt_paydown,multipleLookupValues,currency,Investments.[Quarterly_loan_paydown] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Quarterly_hotel_actuals,Operating_balance,multipleLookupValues,currency,Investments.[Operating_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Quarterly_hotel_actuals,Reserve_balance,multipleLookupValues,currency,Investments.[Reserve_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Quarterly_hotel_actuals,PIP_balance,multipleLookupValues,currency,Investments.[PIP_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Quarterly_hotel_actuals,Initial_principal,multipleLookupValues,currency,Investments.[Total_loan_principal] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Quarterly_hotel_actuals,Latest_quarter_DSCR_reserve_adjusted,formula,number,({EBITDA}-{Total_operating_revenue}*.04)/(3*{Monthly_debt_payment}),Postgres generated column or view expression
+Quarterly_hotel_actuals,Monthly_debt_payment,multipleLookupValues,currency,Investments.[Monthly_debt_payment] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Quarterly_hotel_actuals,Latest_debt_balance,multipleLookupValues,currency,Investments.[Latest_debt_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Quarterly_hotel_actuals,TTM_DSCR_reserve_adjusted,multipleLookupValues,number,Investments.[TTM_DSCR] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Quarterly_hotel_actuals,Latest_quarter_DSCR_non_adjusted,formula,number,({EBITDA})/(3*{Monthly_debt_payment}),Postgres generated column or view expression
+Quarterly_hotel_actuals,TTM_DSCR_non_adjusted,multipleLookupValues,number,Investments.[TTM_DSCR_non_adjusted] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Quarterly_hotel_actuals,Acquired_date,multipleLookupValues,date,Asset_detail.[Acquired_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Hotel_actuals_id,formula,singleLineText,"{Asset_number}&""_""&MONTH({Date})&""_""&YEAR({Date})",Postgres generated column or view expression
+Hotel_actuals,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Investment_status,multipleLookupValues,singleSelect,Asset_detail.[Investment_status] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Month,formula,number,MONTH({Date}),Postgres generated column or view expression
+Hotel_actuals,Year,formula,number,YEAR({Date}),Postgres generated column or view expression
+Hotel_actuals,Quarter_year,formula,singleLineText,"""Q""&DATETIME_FORMAT({Date},'Q_YYYY')",Postgres generated column or view expression
+Hotel_actuals,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Occupancy_%,formula,percent,{Occupied_rooms}/{Available_rooms},Postgres generated column or view expression
+Hotel_actuals, ADR ,formula,currency,{Rooms_sales}/{Occupied_rooms},Postgres generated column or view expression
+Hotel_actuals,RevPAR,formula,currency,{Rooms_sales}/{Available_rooms},Postgres generated column or view expression
+Hotel_actuals,GOP_%,formula,percent,{Gross_operating_profit}/{Total_operating_revenue},Postgres generated column or view expression
+Hotel_actuals,Latest_actuals_date,multipleLookupValues,date,Asset_detail.[Latest_actuals_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Included_in_TTM,formula,singleLineText,"IF(
+  AND(
+    OR({Acquisition_date}, {Open_date}),
+
+    DATETIME_DIFF({Latest_actuals_date}, {Date}, 'months') >= 0,
+    DATETIME_DIFF({Latest_actuals_date}, {Date}, 'months') <= 11,
+
+    DATETIME_DIFF(
+      {Date},
+      IF({Acquisition_date}, {Acquisition_date}, {Open_date}),
+      'months'
+    ) >= 0
+  ),
+  ""Yes"",""No""
+)",Postgres generated column or view expression
+Hotel_actuals,Latest_month_financials,formula,singleLineText,"IF({Date}={Latest_actuals_date},""Yes"","""")",Postgres generated column or view expression
+Hotel_actuals,Cash_flow,formula,currency,{EBITDA_NOI}-{Monthly_debt_payment_manual_input},Postgres generated column or view expression
+Hotel_actuals,Hotel_brand,multipleLookupValues,singleSelect,Asset_detail.[Hotel_brand] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Created_time,createdTime,date,,created_at timestamptz default now()
+Hotel_actuals,Adjusted_NOI,formula,currency,{EBITDA_NOI}-({Total_operating_revenue}*.04),Postgres generated column or view expression
+Hotel_actuals,NOI_%,formula,percent,{EBITDA_NOI}/{Total_operating_revenue},Postgres generated column or view expression
+Hotel_actuals,Latest_updated,createdTime,dateTime,,created_at timestamptz default now()
+Hotel_actuals,Cost_per_occupied_room,formula,currency,{Rooms_expense}/{Occupied_rooms},Postgres generated column or view expression
+Hotel_actuals,Included_in_YTD,formula,singleLineText,"IF( 
+  AND(YEAR({Latest_actuals_date}) = YEAR({Date}), 
+  OR({Acquisition_date}, {Open_date}), 
+  NOT( IS_BEFORE( {Date}, IF({Acquisition_date}, {Acquisition_date}, {Open_date}) ) ), 
+  NOT(IS_AFTER({Date}, {Latest_actuals_date})) ), 
+  ""Yes"", 
+  ""No"" 
+  )",Postgres generated column or view expression
+Hotel_actuals,Budget_gross_operating_profit,multipleLookupValues,currency,Hotel_budget.[Gross_operating_profit] via link [Hotel_budget_link],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Budget_total_operating_revenue,multipleLookupValues,currency,Hotel_budget.[Total_operating_revenue] via link [Hotel_budget_link],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Expense_flex,formula,percent,"IF(
+  OR({Total_operating_revenue}=BLANK(),{Budget_total_operating_revenue}=BLANK(),{Gross_operating_profit}=BLANK(), {Budget_gross_operating_profit}=BLANK(),{Total_operating_revenue}-{Budget_total_operating_revenue}>=0)
+  ,
+  BLANK()
+  ,
+ 1- (({Gross_operating_profit}-{Budget_gross_operating_profit})/({Total_operating_revenue}-{Budget_total_operating_revenue}))
+)",Postgres generated column or view expression
+Hotel_actuals,Expense_flow,formula,percent,"IF(
+  OR({Total_operating_revenue}=BLANK(),{Budget_total_operating_revenue}=BLANK(),{Gross_operating_profit}=BLANK(), {Budget_gross_operating_profit}=BLANK(),{Total_operating_revenue}-{Budget_total_operating_revenue}<0)
+  ,
+  BLANK()
+  ,
+({Gross_operating_profit}-{Budget_gross_operating_profit})/({Total_operating_revenue}-{Budget_total_operating_revenue})
+)",Postgres generated column or view expression
+Hotel_actuals,Last_modified_by,lastModifiedBy,,,set by app / auth.uid()
+Hotel_actuals,Last_modified_time,lastModifiedTime,dateTime,,updated_at timestamptz via trigger
+Hotel_actuals,Monthly_debt_payment_lookup,multipleLookupValues,currency,Asset_detail.[Monthly_debt_payment] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Acquisition_date,multipleLookupValues,date,Asset_detail.[Acquired_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Open_date,multipleLookupValues,date,Asset_detail.[Open_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Acquired_date_lookup,multipleLookupValues,date,Asset_detail.[Acquired_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Management_fee_%,formula,percent,{Management_fees}/{Total_operating_revenue},Postgres generated column or view expression
+Hotel_actuals,Clickup_task_id,multipleLookupValues,singleLineText,Asset_detail.[Clickup_task_id] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Flex_flow,formula,singleLineText,"IF(({Total_operating_revenue} - {PY_total_operating_revenue}) > 0,""Flow"",""Flex"")",Postgres generated column or view expression
+Hotel_actuals,Flex_flow_pct,formula,percent,"IF(
+  {Total_operating_revenue} - {PY_total_operating_revenue} = 0,
+  BLANK(),
+  IF(
+    {Flex_flow} = ""Flow"",
+    ({Gross_operating_profit} - {PY_gross_operating_profit}) / ({Total_operating_revenue} - {PY_total_operating_revenue}),
+    1 - (({Gross_operating_profit} - {PY_gross_operating_profit}) / ({Total_operating_revenue} - {PY_total_operating_revenue}))
+  )
+)",Postgres generated column or view expression
+Hotel_actuals,PY_total_operating_revenue,multipleLookupValues,currency,Hotel_actuals.[Total_operating_revenue] via link [PY_record],JOIN to the linked table in a view (returns array)
+Hotel_actuals,PY_gross_operating_profit,multipleLookupValues,currency,Hotel_actuals.[Gross_operating_profit] via link [PY_record],JOIN to the linked table in a view (returns array)
+Hotel_actuals,Occ_es,formula,percent,{Extended_stay_rooms} / {Available_rooms},Postgres generated column or view expression
+Hotel_actuals,monthly_DSCR,formula,number,{EBITDA_NOI}/{Monthly_debt_payment_manual_input},Postgres generated column or view expression
+Balance_sheet,Balance_sheet_id,formula,singleLineText,"{Asset_detail_link}&""_""&MONTH({Date})&""_""&YEAR({Date})",Postgres generated column or view expression
+Hotel_segmentation,Hotel_segmentation_id,formula,singleLineText,"{Asset_number}&""_""&{Segment}&""_""&MONTH({Date})&""_""&YEAR({Date})",Postgres generated column or view expression
+Hotel_segmentation,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_segmentation,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_segmentation,Segment,formula,singleLineText,"RIGHT({Property_segment_concat},LEN({Property_segment_concat})-FIND(""_"",{Property_segment_concat}))",Postgres generated column or view expression
+Hotel_segmentation,Month,formula,number,MONTH({Date}),Postgres generated column or view expression
+Hotel_segmentation,Year,formula,number,YEAR({Date}),Postgres generated column or view expression
+Hotel_CapEx_2026,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_CapEx_2026,Days_since_ticket_opened,formula,number,"IF({Ivy_Request_Date}, MAX(0, DATETIME_DIFF(TODAY(), {Ivy_Request_Date}, 'days')), BLANK())",Postgres generated column or view expression
+Hotel_CapEx_2026,Reporting_category,multipleLookupValues,multipleSelects,Asset_detail.[Reporting_category] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_CapEx_2026,CapEx_request_id,formula,singleLineText,"""https://forms.fillout.com/t/ragsZYuLeeus?id="" & RECORD_ID()",Postgres generated column or view expression
+Hotel_CapEx_2026,Update_request_hyperlink,button,,,UI-only — drop
+Hotel_CapEx_2026,Last_modified_time,lastModifiedTime,dateTime,,updated_at timestamptz via trigger
+Hotel_CapEx_2026,Renovation_plan_start,multipleLookupValues,date,Asset_detail.[Renovation_plan_start] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_CapEx_2026,Automation_required,formula,singleLineText,"IF(
+  {Approved_y_n} = ""1. Requires Ownership Approval"", ""Yes"",
+  IF(
+    AND({Approved_y_n} = ""2. Under AM Review""), ""Yes"",
+    IF(
+      AND({Approved_y_n} = ""3. Denied"", DATETIME_DIFF(TODAY(), {Last_modified_time}, 'days') < 14), ""Yes"",
+      IF(
+        AND({Approved_y_n} = ""4. Approved"", DATETIME_DIFF(TODAY(), {Last_modified_time}, 'days') < 14), ""Yes""
+      )
+    )
+  )
+)",Postgres generated column or view expression
+STR_budget,STR_budget_id,formula,singleLineText,"{Asset_number}&""_""&MONTH({Date})&""_""&YEAR({Date})",Postgres generated column or view expression
+STR_budget,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_budget,Month,formula,number,MONTH({Date}),Postgres generated column or view expression
+STR_budget,Year,formula,number,YEAR({Date}),Postgres generated column or view expression
+STR_budget,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_budget,STR_code,multipleLookupValues,number,Asset_detail.[STR_code] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,STR_actuals_id,formula,singleLineText,"{Asset_number}&""_""&{Month}&""_""&{Year}",Postgres generated column or view expression
+STR_actuals,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Month,formula,number,MONTH({Date}),Postgres generated column or view expression
+STR_actuals,Day,formula,number,DAY({Date}),Postgres generated column or view expression
+STR_actuals,Year,formula,number,YEAR({Date}),Postgres generated column or view expression
+STR_actuals,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,STR_code,multipleLookupValues,number,Asset_detail.[STR_code] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Helper_STR_market_trend_link,formula,singleLineText,"{Market}&""_""&{Month}&""_""&{Year}",Postgres generated column or view expression
+STR_actuals,Market_occupancy_TTM,multipleLookupValues,percent,STR_market_trend.[Occupancy_TTM] via link [STR_market_trend_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Market_ADR_TTM,multipleLookupValues,currency,STR_market_trend.[ADR_TTM] via link [STR_market_trend_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Market_RevPAR_TTM,multipleLookupValues,currency,STR_market_trend.[RevPar_TTM] via link [STR_market_trend_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Market_supply_TTM,multipleLookupValues,number,STR_market_trend.[Supply_TTM] via link [STR_market_trend_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Market_demand_TTM,multipleLookupValues,number,STR_market_trend.[Demand_TTM] via link [STR_market_trend_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Market_revenue_TTM,multipleLookupValues,currency,STR_market_trend.[Revenue_TTM] via link [STR_market_trend_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Days_in_month,formula,number,DAY({Date}),Postgres generated column or view expression
+STR_actuals,Comp_set_room_count,multipleLookupValues,number,Asset_detail.[Comp_set_room_count] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,My_property_room_count,multipleLookupValues,number,Asset_detail.[Room_count] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Comp_set_revenue,formula,currency,({Occupancy_comp_set})*{Comp_set_room_count}*{ADR_comp_set}*{Days_in_month},Postgres generated column or view expression
+STR_actuals,My_property_revenue,formula,currency,({Occupancy_my_property})*{My_property_room_count}*{ADR_my_property}*{Days_in_month},Postgres generated column or view expression
+STR_actuals,Market_revenue,formula,currency,{Comp_set_revenue}+{My_property_revenue},Postgres generated column or view expression
+STR_actuals,My_property_market_share,formula,percent,{My_property_revenue}/{Market_revenue},Postgres generated column or view expression
+STR_actuals,Hotel_franchise,multipleLookupValues,multipleRecordLinks,Asset_detail.[Hotel_franchise] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Hotel_brand,multipleLookupValues,singleSelect,Asset_detail.[Hotel_brand] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Investment_status,multipleLookupValues,singleSelect,Asset_detail.[Investment_status] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,City,multipleLookupValues,singleSelect,Asset_detail.[City] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Market,multipleLookupValues,singleSelect,Asset_detail.[Market] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Last_updated,lastModifiedTime,dateTime,,updated_at timestamptz via trigger
+STR_actuals,Market_occupancy_TTM_%_chg,multipleLookupValues,percent,STR_market_trend.[Occupancy_TTM_%_chg] via link [STR_market_trend_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Market_ADR_TTM_%_chg,multipleLookupValues,percent,STR_market_trend.[ADR_TTM_%_chg] via link [STR_market_trend_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Market_RevPAR_TTM_%_chg,multipleLookupValues,percent,STR_market_trend.[RevPAR_TTM_%_chg] via link [STR_market_trend_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Health_trend_str,formula,singleLineText,"IF(
+  OR(
+    {RevPAR_my_property_%_chg} = BLANK(),
+    {RevPAR_index_rgi_%_chg} = BLANK()
+  ),
+  BLANK(),
+  IF(
+    AND({RevPAR_my_property_%_chg} > 0, {RevPAR_index_rgi_%_chg} > 0),
+    ""4. Healthy"",
+    IF(
+      AND({RevPAR_my_property_%_chg} > 0, {RevPAR_index_rgi_%_chg} < 0),
+      ""3. Momentum"",
+      IF(
+        AND({RevPAR_my_property_%_chg} < 0, {RevPAR_index_rgi_%_chg} > 0),
+        ""2. Defensive"",
+        IF(
+          AND({RevPAR_my_property_%_chg} < 0, {RevPAR_index_rgi_%_chg} < 0),
+          ""1. Underperforming"",
+          BLANK()
+        )
+      )
+    )
+  )
+)",Postgres generated column or view expression
+STR_actuals,Latest_str_actuals_date,multipleLookupValues,date,Asset_detail.[Latest_str_actuals_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Latest_str_actuals_day,formula,singleLineText,"IF( {Date} = {Latest_str_actuals_date},""Yes"", BLANK() )",Postgres generated column or view expression
+STR_actuals,Acquisition_date,multipleLookupValues,date,Asset_detail.[Acquired_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Open_date,multipleLookupValues,date,Asset_detail.[Open_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_actuals,Included_in_TTM,formula,singleLineText,"IF(
+  AND(
+    OR({Acquisition_date}, {Open_date}),
+
+    DATETIME_DIFF({Latest_str_actuals_date}, {Date}, 'months') >= 0,
+    DATETIME_DIFF({Latest_str_actuals_date}, {Date}, 'months') <= 11,
+
+    DATETIME_DIFF(
+      {Date},
+      IF({Acquisition_date}, {Acquisition_date}, {Open_date}),
+      'months'
+    ) >= 0
+  ),
+  ""Yes"",""No""
+)",Postgres generated column or view expression
+STR_weekly_data,STR_weekly_data_id,formula,singleLineText,"{Asset_number}&""_""&{Month}&""_""&{Day}&""_""&{Year}",Postgres generated column or view expression
+STR_weekly_data,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_weekly_data,Month,formula,number,MONTH({End_date}),Postgres generated column or view expression
+STR_weekly_data,Day,formula,number,DAY({End_date}),Postgres generated column or view expression
+STR_weekly_data,Day_of_week,formula,singleLineText,"DATETIME_FORMAT({End_date},""dddd"")",Postgres generated column or view expression
+STR_weekly_data,Year,formula,number,YEAR({End_date}),Postgres generated column or view expression
+STR_weekly_data,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_weekly_data,STR_code,multipleLookupValues,number,Asset_detail.[STR_code] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_weekly_data,Investment_status,multipleLookupValues,singleSelect,Asset_detail.[Investment_status] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_weekly_data,Last_updated,lastModifiedTime,dateTime,,updated_at timestamptz via trigger
+STR_weekly_data,Budgeted_strategy,multipleLookupValues,multipleSelects,Asset_detail.[Budgeted_strategy] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_weekly_data,Budget_RevPAR_rank,multipleLookupValues,number,STR_budget.[RevPAR_rank] via link [STR_budget_link],JOIN to the linked table in a view (returns array)
+STR_weekly_data,Budget_ADR_rank,multipleLookupValues,number,STR_budget.[ADR_rank] via link [STR_budget_link],JOIN to the linked table in a view (returns array)
+STR_weekly_data,Budget_occupancy_rank,multipleLookupValues,number,STR_budget.[Occupancy_rank] via link [STR_budget_link],JOIN to the linked table in a view (returns array)
+STR_weekly_data,STR_weekly_performance,formula,singleLineText,"IF(
+  OR(
+    {RevPAR_index_rgi} = BLANK(),
+    {RevPAR_index_rgi_%_chg} = BLANK()
+  ),
+  BLANK(),
+  IF(
+    AND({RevPAR_index_rgi} > 100, {RevPAR_index_rgi_%_chg} > 0),
+    ""4. Ahead and Gaining"",
+    IF(
+      AND({RevPAR_index_rgi}> 100, {RevPAR_index_rgi_%_chg} < 0),
+      ""3. Ahead and Losing"",
+      IF(
+        AND({RevPAR_index_rgi} < 100, {RevPAR_index_rgi_%_chg} > 0),
+        ""2. Behind and Gaining"",
+        IF(
+          AND({RevPAR_index_rgi} < 100, {RevPAR_index_rgi_%_chg} < 0),
+          ""1. Behind and Losing"",
+          BLANK()
+        )
+      )
+    )
+  )
+)",Postgres generated column or view expression
+STR_weekly_data,Latest_STR_weekly_trend_date,multipleLookupValues,date,Asset_detail.[Latest_STR_weekly_trend_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_weekly_data,Latest_STR_weekly_trend,formula,singleLineText,"IF( {End_date} = {Latest_STR_weekly_trend_date},""Yes"", BLANK() )",Postgres generated column or view expression
+STR_weekly_data,Clickup_task_id,multipleLookupValues,singleLineText,Asset_detail.[Clickup_task_id] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_daily_data,STR_daily_data_id,formula,singleLineText,"{Asset_number}&""_""&DATETIME_FORMAT({Date},'MM_DD_YYYY')",Postgres generated column or view expression
+STR_daily_data,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_daily_data,Month,formula,singleLineText,"DATETIME_FORMAT({Date},'M')",Postgres generated column or view expression
+STR_daily_data,Day,formula,number,DAY({Date}),Postgres generated column or view expression
+STR_daily_data,Day_of_week,formula,singleLineText,"DATETIME_FORMAT({Date},'dddd')",Postgres generated column or view expression
+STR_daily_data,Year,formula,number,YEAR({Date}),Postgres generated column or view expression
+STR_daily_data,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_daily_data,STR_code,multipleLookupValues,number,Asset_detail.[STR_code] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_daily_data,City,multipleLookupValues,singleSelect,Asset_detail.[City] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_daily_data,Market,multipleLookupValues,singleSelect,Asset_detail.[Market] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_daily_data,Hotel_brand,multipleLookupValues,singleSelect,Asset_detail.[Hotel_brand] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,STR_weekly_data_id,formula,singleLineText,"{Asset_number}&""_""&{Month}&""_""&{Day}&""_""&{Year}",Postgres generated column or view expression
+STR_28_day_trend,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,Month,formula,number,MONTH({End_date}),Postgres generated column or view expression
+STR_28_day_trend,Day,formula,number,DAY({End_date}),Postgres generated column or view expression
+STR_28_day_trend,Day_of_week,formula,singleLineText,"DATETIME_FORMAT({End_date},""dddd"")",Postgres generated column or view expression
+STR_28_day_trend,Year,formula,number,YEAR({End_date}),Postgres generated column or view expression
+STR_28_day_trend,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,STR_code,multipleLookupValues,number,Asset_detail.[STR_code] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,Latest_28_day_trend,formula,number,MAX({End_date}),Postgres generated column or view expression
+STR_28_day_trend,Investment_status,multipleLookupValues,singleSelect,Asset_detail.[Investment_status] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,Last_updated,lastModifiedTime,dateTime,,updated_at timestamptz via trigger
+STR_28_day_trend,Budgeted_strategy,multipleLookupValues,multipleSelects,Asset_detail.[Budgeted_strategy] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,Budget_RevPAR_rank,multipleLookupValues,number,STR_budget.[RevPAR_rank] via link [STR_budget_link],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,Budget_ADR_rank,multipleLookupValues,number,STR_budget.[ADR_rank] via link [STR_budget_link],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,Budget_occupancy_rank,multipleLookupValues,number,STR_budget.[Occupancy_rank] via link [STR_budget_link],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,STR_28_day_performance,formula,singleLineText,"IF(
+  OR(
+    {RevPAR_index_rgi} = BLANK(),
+    {RevPAR_index_rgi_%_chg} = BLANK()
+  ),
+  BLANK(),
+  IF(
+    AND({RevPAR_index_rgi} > 100, {RevPAR_index_rgi_%_chg} >= 0),
+    ""4. Ahead and Gaining"",
+    IF(
+      AND({RevPAR_index_rgi} > 100, {RevPAR_index_rgi_%_chg} <= 0),
+      ""3. Ahead and Losing"",
+      IF(
+        AND({RevPAR_index_rgi} < 100, {RevPAR_index_rgi_%_chg} >= 0),
+        ""2. Behind and Gaining"",
+        IF(
+          AND({RevPAR_index_rgi} < 100, {RevPAR_index_rgi_%_chg} <= 0),
+          ""1. Behind and Losing"",
+          BLANK()
+        )
+      )
+    )
+  )
+)",Postgres generated column or view expression
+STR_28_day_trend,Latest_STR_28_day_trend_date,multipleLookupValues,date,Asset_detail.[Latest_STR_28_day_trend_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,Latest_STR_28_day,formula,singleLineText,"IF( {End_date} = {Latest_STR_28_day_trend_date},""Yes"", BLANK() )",Postgres generated column or view expression
+STR_28_day_trend,1_week_prior_week,formula,singleLineText,"{Asset_number} & ""_"" & DATETIME_FORMAT(DATEADD({End_date}, -7, 'days'), 'M_D_YYYY')",Postgres generated column or view expression
+STR_28_day_trend,2_week_prior_key,formula,singleLineText,"{Asset_number} & ""_"" & DATETIME_FORMAT(DATEADD({End_date}, -14, 'days'), 'M_D_YYYY')",Postgres generated column or view expression
+STR_28_day_trend,3_week_prior_key,formula,singleLineText,"{Asset_number} & ""_"" & DATETIME_FORMAT(DATEADD({End_date}, -21, 'days'), 'M_D_YYYY')",Postgres generated column or view expression
+STR_28_day_trend,4_week_prior_key,formula,singleLineText,"{Asset_number} & ""_"" & DATETIME_FORMAT(DATEADD({End_date}, -28, 'days'), 'M_D_YYYY')",Postgres generated column or view expression
+STR_28_day_trend,Prior_bucket_1,multipleLookupValues,singleLineText,STR_28_day_trend.[STR_28_day_performance] via link [1_week_prior],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,Prior_bucket_2,multipleLookupValues,singleLineText,STR_28_day_trend.[STR_28_day_performance] via link [2_week_prior],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,Prior_bucket_3,multipleLookupValues,singleLineText,STR_28_day_trend.[STR_28_day_performance] via link [3_week_prior],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,Prior_bucket_4,multipleLookupValues,singleLineText,STR_28_day_trend.[STR_28_day_performance] via link [4_week_prior],JOIN to the linked table in a view (returns array)
+STR_28_day_trend,Streak_28_day,formula,singleLineText,"IF(
+  {Latest_STR_28_day} = ""Yes"",
+  IF(
+    {STR_28_day_performance} = BLANK(),
+    """",
+    IF(
+      AND({STR_28_day_performance}={Prior_bucket_1}, {STR_28_day_performance}={Prior_bucket_2}, {STR_28_day_performance}={Prior_bucket_3}, {STR_28_day_performance}={Prior_bucket_4}),
+      ""4+ weeks"",
+      IF(
+        AND({STR_28_day_performance}={Prior_bucket_1}, {STR_28_day_performance}={Prior_bucket_2}, {STR_28_day_performance}={Prior_bucket_3}),
+        ""4 weeks"",
+        IF(
+          AND({STR_28_day_performance}={Prior_bucket_1}, {STR_28_day_performance}={Prior_bucket_2}),
+          ""3 weeks"",
+          IF(
+            {STR_28_day_performance}={Prior_bucket_1},
+            ""2 weeks"",
+            ""1 week""
+          )
+        )
+      )
+    )
+  ),
+  """"
+)",Postgres generated column or view expression
+STR_market_trend,STR_market_trend_id,formula,singleLineText,"{Market}&""_""&{Month}&""_""&{Year}",Postgres generated column or view expression
+STR_market_trend,Month,formula,number,MONTH({Date}),Postgres generated column or view expression
+STR_market_trend,Year,formula,number,YEAR({Date}),Postgres generated column or view expression
+STR_comp_set,STR_comp_set_id,formula,singleLineText,"{Asset_detail_link}&""_""&{Subject_property_STR_code}&IF({Subject_property_STR_code}={STR_code},""_subject"","""")
+",Postgres generated column or view expression
+STR_comp_set,Subject_property_STR_code,multipleLookupValues,number,Asset_detail.[STR_code] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_comp_set,Comp_set_room_count,multipleLookupValues,number,Asset_detail.[Comp_set_room_count] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_comp_set,Subject_property_room_count,multipleLookupValues,number,Asset_detail.[Room_count] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_comp_set,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_comp_set,Subject_property_city,multipleLookupValues,singleSelect,Asset_detail.[City] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_comp_set,Rooms_percent_of_market,formula,percent,{Subject_property_room_count}/({Comp_set_room_count}+{Subject_property_room_count}),Postgres generated column or view expression
+STR_comp_set,Subject_last_renovation_year,multipleLookupValues,number,Asset_detail.[Last_renovation_year] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+STR_comp_set,lmt,lastModifiedTime,dateTime,,updated_at timestamptz via trigger
+STR_comp_set,Subject_property,formula,singleLineText,"IF({Subject_property_STR_code} = {STR_code},""Yes"",""No"")",Postgres generated column or view expression
+Hotel_onthebooks,Hotel_onthebooks_id,formula,singleLineText,"{Asset_detail}&""_""&MONTH({Date})&""_""&YEAR({Date})&""_""&DAY({Upload Date})&""_""&MONTH({Upload Date})",Postgres generated column or view expression
+Hotel_onthebooks,Month,formula,number,MONTH({Date}),Postgres generated column or view expression
+Hotel_onthebooks,Year,formula,number,YEAR({Date}),Postgres generated column or view expression
+Hotel_onthebooks,Asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail],JOIN to the linked table in a view (returns array)
+Full_hotel_comp_landscape,Full_hotel_comp_landscape_id,formula,singleLineText,"{Asset_number}&""_""&{STR_code}",Postgres generated column or view expression
+Full_hotel_comp_landscape,Asset_number,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Full_hotel_comp_landscape,Subject_property_STR_code,multipleLookupValues,number,Asset_detail.[STR_code] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Full_hotel_comp_landscape,Age,formula,number,"DATETIME_DIFF(TODAY(),{Open_date},'years')",Postgres generated column or view expression
+Full_hotel_comp_landscape,Subject_internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Full_hotel_comp_landscape,Subject_city,multipleLookupValues,singleSelect,Asset_detail.[City] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Full_hotel_comp_landscape,Subject_state,multipleLookupValues,singleSelect,Asset_detail.[State] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Full_hotel_comp_landscape,Target_property,formula,singleLineText,"IF({Subject_property_STR_code}={STR_code},""Yes"",""No"")",Postgres generated column or view expression
+Full_hotel_comp_landscape,Autonumber,autoNumber,,,bigserial / row_number() — usually drop
+Hotel_brand_metrics,Witness_active_portfolio_properties,rollup,number,Asset_detail.[Asset_detail_id] via link [Asset_detail_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Hotel_brand_metrics,Witness_active_construction_portfolio_properties,rollup,number,Asset_detail.[Asset_detail_id] via link [Asset_detail_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Hotel_brand_metrics,Total_room_count_Witness_active_portfolio,rollup,number,Asset_detail.[Room_count] via link [Asset_detail_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Hotel_brand_metrics,Total_development_room_count,rollup,number,Asset_detail.[Room_count] via link [Asset_detail_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Hotel_brand_metrics,Asset_number_Witness_active_portfolio,multipleLookupValues,singleLineText,Asset_detail.[Asset_number] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_brand_metrics,Created_time,createdTime,dateTime,,created_at timestamptz default now()
+Hotel_brand_metrics,Witness_active_portfolio_valuation,rollup,currency,Asset_detail.[Latest_valuation_balance] via link [Asset_detail_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Lenders,Lead_contact,multipleLookupValues,singleSelect,Loan_summary_data.[Lead_contact] via link [Loan_summary_data_link],JOIN to the linked table in a view (returns array)
+Lenders,Total_debt_balance,rollup,currency,Loan_summary_data.[Latest_debt_balance] via link [Loan_summary_data_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Lenders,Total_cash_balance,rollup,currency,Cash_accounts.[Latest_cash_balance] via link [Cash_accounts_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Lenders,Latest_lending_transaction_date,rollup,date,Hotel_sale_comps.[Sale_date] via link [Hotel_sale_comps_link],Aggregate (SUM/AVG/etc.) in a view over the linked child rows
+Hotel_sale_comps,Helper_Lenders_link,formula,singleLineText,"IF(
+  FIND("","",{First_trust_deed_lender})>0,REGEX_REPLACE({First_trust_deed_lender},"",.*"",""""),
+IF(FIND("" NA"",{First_trust_deed_lender})>0,REGEX_REPLACE({First_trust_deed_lender},"" NA"",""""),
+{First_trust_deed_lender}))",Postgres generated column or view expression
+Debt_resizing,Debt_resizing_id,formula,singleLineText,{Investments_link},Postgres generated column or view expression
+Debt_resizing,Est_PIP_cost,multipleLookupValues,currency,Investments.[Est_PIP_cost] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Debt_resizing,Loan_maturity,multipleLookupValues,date,Investments.[Loan_maturity] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Debt_resizing,TTM_total_operating_revenue,multipleLookupValues,currency,Investments.[TTM_total_operating_revenue] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Debt_resizing,Adj_TTM_NOI,multipleLookupValues,currency,Investments.[Adj_TTM_NOI] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Debt_resizing,TTM_DSCR,multipleLookupValues,number,Investments.[TTM_DSCR] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Debt_resizing,Latest_debt_balance,multipleLookupValues,currency,Investments.[Latest_debt_balance] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Debt_resizing,Annual_debt_payment,multipleLookupValues,currency,Investments.[TTM_debt_payment] via link [Investments_link],JOIN to the linked table in a view (returns array)
+Debt_resizing,Refi_debt_payment_1.5_DCSR,formula,currency,{Adj_TTM_NOI} / 1.5,Postgres generated column or view expression
+Debt_resizing,20yr_refi_loan,formula,currency,"({Refi_debt_payment_1.5_DCSR}/12) 
+/ 
+(
+  (({5yr_UST}+{Spread})/12)
+  /
+  (
+    1-
+    POWER((1+(({5yr_UST}+{Spread})/12)),-{20_year_AM_payments})
+  )
+)",Postgres generated column or view expression
+Debt_resizing,25_yr_refi_loan,formula,currency,"({Refi_debt_payment_1.5_DCSR}/12) 
+/ 
+(
+  (({5yr_UST}+{Spread})/12)
+  /
+  (
+    1-
+    POWER((1+(({5yr_UST}+{Spread})/12)),-{25_year_AM_payments})
+  )
+)",Postgres generated column or view expression
+Debt_resizing,25_yr_refi_variance,formula,currency,"ROUNDDOWN({25_yr_refi_loan} - {Latest_debt_balance},-4)",Postgres generated column or view expression
+Debt_resizing,30_yr_refi_loan,formula,currency,"({Refi_debt_payment_1.5_DCSR}/12) 
+/ 
+(
+  (({5yr_UST}+{Spread})/12)
+  /
+  (
+    1-
+    POWER((1+(({5yr_UST}+{Spread})/12)),-{30_year_AM_payments})
+  )
+)",Postgres generated column or view expression
+Debt_resizing,20_year_AM_payments,formula,number,20*12,Postgres generated column or view expression
+Debt_resizing,25_year_AM_payments,formula,number,25*12,Postgres generated column or view expression
+Debt_resizing,30_year_AM_payments,formula,number,30*12,Postgres generated column or view expression
+Debt_resizing,Interest_rate,formula,percent,{5yr_UST}+{Spread},Postgres generated column or view expression
+Year_end_financials,Year_end_financials_id,formula,singleLineText,"{Asset_detail_link}&""_""&{Year}",Postgres generated column or view expression
+Year_end_financials,Investments_link,multipleLookupValues,multipleRecordLinks,Asset_detail.[Investments_link] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Year_end_financials,GOP_%,formula,percent,{GOP}/{Total_operating_revenue},Postgres generated column or view expression
+Year_end_financials,Market,multipleLookupValues,singleSelect,Asset_detail.[Market] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Year_end_financials,Brand,multipleLookupValues,singleSelect,Asset_detail.[Hotel_brand] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_GSS_data,Hotel_GSS_data_id,formula,singleLineText,"{Asset_detail_link}&""_""&{Month}&""_""&{Year}",Postgres generated column or view expression
+Hotel_GSS_data,Month,formula,singleLineText,"DATETIME_FORMAT({Date},'M')",Postgres generated column or view expression
+Hotel_GSS_data,Year,formula,number,YEAR({Date}),Postgres generated column or view expression
+Hotel_GSS_data,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_GSS_data,Hotel_brand,multipleLookupValues,singleSelect,Asset_detail.[Hotel_brand] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_GSS_data,Consolidated_survey_count,formula,number,"IF({Hotel_brand} = ""Marriott"" , {Marriott_responses}, IF({Hotel_brand} = ""Hilton"", {Hilton_responses}, IF({Hotel_brand} = ""IHG"", {IHG_responses_QTD})))",Postgres generated column or view expression
+Hotel_GSS_data,Consolidated_intent_to_recommend,formula,number,"IF({Hotel_brand} = ""Marriott"" , {Marriott_intent_to_recommend}, IF({Hotel_brand} = ""Hilton"", {Hilton_stay_score}, IF({Hotel_brand} = ""IHG"", {IHG_likely_to_recommend_QTD}, IF({Hotel_brand} = ""Hyatt"", {Hyatt_NPS_net_promoter_scores}))))",Postgres generated column or view expression
+Hotel_GSS_data,Consolidated_cleanliness,formula,number,"IF({Hotel_brand} = ""Marriott"" , {Marriott_cleanliness}, IF({Hotel_brand} = ""Hilton"", {Hilton_overall_cleanliness}, IF({Hotel_brand} = ""IHG"", {IHG_room_cleanliness_QTD}, IF({Hotel_brand} = ""Hyatt"", {Hyatt_room_cleanliness}))))",Postgres generated column or view expression
+Hotel_GSS_data,Consolidated_loyalty_recognition,formula,number,"IF({Hotel_brand} = ""Marriott"" , {Marriott_elite_appreciation}, IF({Hotel_brand} = ""Hilton"", {Hilton_HH_appreciation}, IF({Hotel_brand} = ""IHG"", {IHG_loyalty_recognition_QTD})))",Postgres generated column or view expression
+Hotel_GSS_data,Consolidated_staff_service,formula,number,"IF({Hotel_brand} = ""Marriott"" , {Marriott_staff_service}, IF({Hotel_brand} = ""Hilton"", {Hilton_service_quality}, IF({Hotel_brand} = ""IHG"", {IHG_overall_service_QTD}, IF({Hotel_brand} = ""Hyatt"", {Hyatt_checkin_process}))))",Postgres generated column or view expression
+Hotel_QA_data,Hotel_QA_data_id,formula,singleLineText,"{Internal_asset_name}&""_""&{Month}&""_""&{Year}",Postgres generated column or view expression
+Hotel_QA_data,Month,formula,singleLineText,"DATETIME_FORMAT({Date},'M')",Postgres generated column or view expression
+Hotel_QA_data,Year,formula,number,YEAR({Date}),Postgres generated column or view expression
+Hotel_QA_data,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_QA_data,Hotel_brand,multipleLookupValues,singleSelect,Asset_detail.[Hotel_brand] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_QA_data,Consolidated_cleanliness,formula,number,"IF({Hotel_brand} = ""Marriott"" , {Marriott_cleanliness}, IF({Hotel_brand} = ""Hilton"", {Hilton_cleanliness}, IF({Hotel_brand} = ""IHG"", {IHG_cleanliness}, IF({Hotel_brand} = ""Hyatt"", {Hyatt_cleanliness}))))",Postgres generated column or view expression
+Hotel_QA_data,Consolidated_brand_standards,formula,number,"IF({Hotel_brand} = ""Marriott"" , {Marriott_brand_promise}, IF({Hotel_brand} = ""Hilton"", {Hilton_brand_standards}, IF({Hotel_brand} = ""IHG"", {IHG_brand_standard_important}, IF({Hotel_brand} = ""Hyatt"", {Hyatt_brand_standard}))))",Postgres generated column or view expression
+Hotel_QA_data,Consolidated_QA_score,formula,number,"IF({Hotel_brand} = ""Marriott"" , {Marriott_BSA_score}, IF({Hotel_brand} = ""Hilton"", {Hilton_overall_QA_score}, IF({Hotel_brand} = ""IHG"", {IHG_brand_safety_standard}, IF({Hotel_brand} = ""Hyatt"", {Hyatt_score}))))",Postgres generated column or view expression
+Hotel_QA_data,Consolidated_condition_upkeep,formula,number,"IF({Hotel_brand} = ""Marriott"" , {Marriott_maintenance_upkeep}, IF({Hotel_brand} = ""Hilton"", {Hilton_guest_rooms}, IF({Hotel_brand} = ""IHG"", {IHG_condition}, IF({Hotel_brand} = ""Hyatt"", {Hyatt_working_order}))))",Postgres generated column or view expression
+Guarantor_Compliance,Loan_summary_id,multipleLookupValues,singleLineText,Loan_summary_data.[Loan_summary_data_id] via link [Loan_summary_link],JOIN to the linked table in a view (returns array)
+Guarantor_Compliance,Lenders_id,multipleLookupValues,singleLineText,Lenders.[Lenders_id] via link [Lenders_link],JOIN to the linked table in a view (returns array)
+Guarantor_Compliance,Latest_debt_balance,multipleLookupValues,currency,Loan_summary_data.[Latest_debt_balance] via link [Loan_summary_link],JOIN to the linked table in a view (returns array)
+Guarantor_Compliance,Contingent_liability,formula,currency,{Latest_debt_balance} * {%_Guarantee},Postgres generated column or view expression
+Guarantor_Compliance,Loan_maturity,multipleLookupValues,date,Loan_summary_data.[Loan_maturity] via link [Loan_summary_link],JOIN to the linked table in a view (returns array)
+Guarantor_Compliance,Interest_rate,multipleLookupValues,number,Loan_summary_data.[Interest_rate] via link [Loan_summary_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Hotel_PIP_history_ID,formula,singleLineText,{Asset_detail_link},Postgres generated column or view expression
+Hotel_PIP_history,Last_renovation_year,multipleLookupValues,number,Asset_detail.[Last_renovation_year] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Open_date,multipleLookupValues,date,Asset_detail.[Open_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Acquired_date,multipleLookupValues,date,Asset_detail.[Acquired_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Renovation_plan_start,multipleLookupValues,date,Asset_detail.[Renovation_plan_start] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_brand_renovation_due_date,multipleLookupValues,date,Asset_detail.[PIP_brand_renovation_due_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Est_PIP_cost_per_key,multipleLookupValues,currency,Asset_detail.[Est_PIP_cost_per_key] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Est_PIP_cost,multipleLookupValues,currency,Asset_detail.[Est_PIP_cost] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Renovation_plan_start_year,multipleLookupValues,number,Asset_detail.[Renovation_plan_start_year] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_overview,multipleLookupValues,singleLineText,Asset_detail.[PIP_overview] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Renovation_internal_target_end_date,multipleLookupValues,date,Asset_detail.[Renovation_internal_target_end_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_requirements_link,multipleLookupValues,url,Asset_detail.[PIP_requirements_link] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_owner_approval_status,multipleLookupValues,singleSelect,Asset_detail.[PIP_owner_approval_status] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_construction_vendor,multipleLookupValues,singleSelect,Asset_detail.[PIP_construction_vendor] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Renovation_plan_start_manual_target,multipleLookupValues,date,Asset_detail.[Renovation_plan_start_manual_target] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Renovation_target_year,multipleLookupValues,number,Asset_detail.[Renovation_target_year] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Renovation_target_quarter,multipleLookupValues,singleLineText,Asset_detail.[Renovation_target_quarter] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Renovation_target_month,multipleLookupValues,number,Asset_detail.[Renovation_target_month] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_comments,multipleLookupValues,singleLineText,Asset_detail.[PIP_comments] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_design_vendor,multipleLookupValues,singleSelect,Asset_detail.[PIP_design_vendor] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_budget_link,multipleLookupValues,url,Asset_detail.[PIP_budget_link] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Brand_renovation_due_date_year,multipleLookupValues,number,Asset_detail.[Brand_renovation_due_date_year] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_deposit_estimate,multipleLookupValues,currency,Asset_detail.[PIP_deposit_estimate] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_estimated_deposit_date,multipleLookupValues,date,Asset_detail.[PIP_estimated_deposit_date] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_procurement_vendor,multipleLookupValues,singleSelect,Asset_detail.[PIP_procurement_vendor] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_funding_secured,multipleLookupValues,singleSelect,Asset_detail.[PIP_funding_secured] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_owner_contact,multipleLookupValues,singleSelect,Asset_detail.[PIP_owner_contact] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_design_approver,multipleLookupValues,singleSelect,Asset_detail.[PIP_design_approver] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_scope,multipleLookupValues,multipleSelects,Asset_detail.[PIP_scope] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_design_review_status,multipleLookupValues,singleSelect,Asset_detail.[PIP_design_review_status] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_owner_rep_contact,multipleLookupValues,singleSelect,Asset_detail.[PIP_owner_rep_contact] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP_funding_strategy,multipleLookupValues,singleSelect,Asset_detail.[PIP_funding_strategy] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,PIP Authorization Req'd By,multipleLookupValues,date,Asset_detail.[PIP Authorization Req'd By] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_PIP_history,Internal_asset_name (from Asset_detail_link),multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Cash_flow_tracking,Cash_flow_ID,formula,singleLineText,"{Asset_detail_link}&""_""&{Month}&""_""&{Year}",Postgres generated column or view expression
+Cash_flow_tracking,Internal_asset_name,multipleLookupValues,singleLineText,Asset_detail.[Internal_asset_name] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Cash_flow_tracking,Investments_link,multipleLookupValues,multipleRecordLinks,Asset_detail.[Investments_link] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Cash_flow_tracking,Month,formula,number,MONTH({Date}),Postgres generated column or view expression
+Cash_flow_tracking,Year,formula,number,"YEAR({Date})
+",Postgres generated column or view expression
+Cash_flow_tracking,Automation_trigger,formula,singleLineText,"IF({Date}, IF(DATETIME_FORMAT({Date}, 'MM') = DATETIME_FORMAT(DATEADD(TODAY(), 1, 'months'), 'MM'), 'Yes', 'No'))",Postgres generated column or view expression
+Cash_flow_tracking,Tax_flag,multipleLookupValues,singleLineText,Asset_detail.[Cashflow_Payment_type] via link [Asset_detail_link],JOIN to the linked table in a view (returns array)
+Hotel_GSS_data_v2,GSS_hotel_ID,formula,singleLineText,"{Asset_detail_link}&""_""&{Month}&""_""&{Year}",Postgres generated column or view expression
+Hotel_GSS_data_v2,Month,formula,singleLineText,"DATETIME_FORMAT({Date},'M')",Postgres generated column or view expression
+Hotel_GSS_data_v2,Year,formula,number,YEAR({Date}),Postgres generated column or view expression

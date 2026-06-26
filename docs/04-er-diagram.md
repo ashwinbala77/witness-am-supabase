@@ -1,0 +1,65 @@
+# Entity Relationship Diagram
+
+Tables and their links (from Airtable `multipleRecordLinks`). Renders automatically on GitHub.
+
+```mermaid
+erDiagram
+    investments }o--o{ investments_market_value : links
+    investments }o--o{ asset_detail : links
+    investments }o--o{ cash_accounts : links
+    investments }o--o{ cash_balance_input : links
+    investments }o--o{ loan_summary_data : links
+    investments }o--o{ loan_balance_input : links
+    investments }o--o{ hotel_actuals : links
+    investments }o--o{ hotel_budget : links
+    investments }o--o{ debt_resizing : links
+    investments }o--o{ quarterly_hotel_actuals : links
+    investments }o--o{ hotel_qa_data : links
+    investments }o--o{ hotel_gss_data : links
+    investments }o--o{ hotel_forecast : links
+    investments }o--o{ witness_am_forecast : links
+    investments }o--o{ investment_positions : links
+    investments }o--o{ balance_sheet : links
+    investments }o--o{ distributions : links
+    investments }o--o{ hotel_pip_history : links
+    investments }o--o{ hotel_gss_data_v2 : links
+    asset_detail }o--o{ hotel_brand_metrics : links
+    asset_detail }o--o{ hotel_actuals : links
+    asset_detail }o--o{ hotel_budget : links
+    asset_detail }o--o{ quarterly_hotel_actuals : links
+    asset_detail }o--o{ str_weekly_data : links
+    asset_detail }o--o{ hotel_qa_data : links
+    asset_detail }o--o{ hotel_gss_data : links
+    asset_detail }o--o{ hotel_forecast : links
+    asset_detail }o--o{ year_end_financials : links
+    asset_detail }o--o{ full_hotel_comp_landscape : links
+    asset_detail }o--o{ str_daily_data : links
+    asset_detail }o--o{ str_comp_set : links
+    asset_detail }o--o{ str_actuals : links
+    asset_detail }o--o{ str_budget : links
+    asset_detail }o--o{ hotel_segmentation : links
+    asset_detail }o--o{ witness_am_forecast : links
+    asset_detail }o--o{ str_28_day_trend : links
+    asset_detail }o--o{ hotel_capex : links
+    asset_detail }o--o{ hotel_capex_2026 : links
+    asset_detail }o--o{ balance_sheet : links
+    asset_detail }o--o{ hotel_onthebooks : links
+    asset_detail }o--o{ hotel_pip_history : links
+    asset_detail }o--o{ cash_flow_tracking : links
+    asset_detail }o--o{ hotel_gss_data_v2 : links
+    investing_entities }o--o{ investment_positions : links
+    investing_entities }o--o{ distributions : links
+    investment_positions }o--o{ distributions : links
+    cash_accounts }o--o{ lenders : links
+    cash_accounts }o--o{ cash_balance_input : links
+    loan_summary_data }o--o{ lenders : links
+    loan_summary_data }o--o{ loan_balance_input : links
+    loan_summary_data }o--o{ guarantor_compliance : links
+    hotel_budget }o--o{ hotel_actuals : links
+    hotel_forecast }o--o{ hotel_actuals : links
+    str_budget }o--o{ str_weekly_data : links
+    str_budget }o--o{ str_28_day_trend : links
+    str_actuals }o--o{ str_market_trend : links
+    lenders }o--o{ hotel_sale_comps : links
+    lenders }o--o{ guarantor_compliance : links
+```
